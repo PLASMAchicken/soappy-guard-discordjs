@@ -1,0 +1,11 @@
+{
+  "dark": "#534e31",
+  "red": "#ff0000",
+  "help": "#ffff00",
+  "restart": "#f2920c",
+  "temp": "#f9b031",
+  "feedback": "#f9b031",
+  "error": "#ff0000",
+  "botinfo": "#15f153"
+
+}

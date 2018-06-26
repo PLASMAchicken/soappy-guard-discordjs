@@ -1,0 +1,18 @@
+{
+    "prefix": "!",
+    "tempmsg": 10000,
+    "pooltime": 3000,
+    "botownerserverid": "432245883619508224",
+    "cooldownseconds": "5",
+    "botownerid": [
+        "193406800614129664",
+        "YOUR ID",
+        "447790361990135811"
+    ],
+    "botadminid": [
+        "193406800614129664x",
+        "YOUR ID"
+    ],
+    "bullytime": "5min",
+    "on_start_print_invite": true
+}

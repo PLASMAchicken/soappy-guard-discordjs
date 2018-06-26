@@ -1,0 +1,33 @@
+const Discord = require("discord.js");
+const colorer = require("../config/color.json")
+const botconfig = require("../config/botconfig.json")
+
+module.exports.run = async (bot, message, args) => {
+    var feedback = args.join(' ');
+
+    let feedbackEmbed = new Discord.RichEmbed()
+    .setDescription("Reports")
+    .setColor(colorer.feedback)
+
+    .addField("Requested by", `${message.author} with ID: ${message.author.id}`)
+    .addField("Requested on Server:", `${message.guild.name} with ID: ${message.guild.id} `)
+    .addField("Feedback:", feedback)
+        .setTimestamp(message.createdAt);
+
+
+    let botownerguild = bot.guilds.get(botconfig.botownerserverid)
+    let requestchannel = botownerguild.channels.find(`name`, "bot-requests");
+    if(!requestchannel) return message.channel.send("Couldn't find #bot-requests channel. This is an issue on the Bot Owner Server");
+
+
+    message.delete().catch(O_o=>{});
+    requestchannel.send(feedbackEmbed);
+
+}
+ 
+module.exports.help = {
+    name: "request",
+    description: "!request",
+    usage: "request <feedback>"
+
+}

@@ -1,0 +1,23 @@
+html
+  head
+    title Basic User Information
+  |   
+  body
+    
+    | Discord js Web Eval: 
+    br
+    | CODE: 
+    form(action='get', method='GET')
+      textarea(name='code', cols='125', rows='25')
+      br
+      | Eval ID:
+      input(type='text', name='message')
+      br
+      |                Stealth: 
+      |       
+      select(name='stealth')
+        option(value='false') false
+        |         
+        option(value='true') true
+      |       
+      input(type='submit', value='submit')

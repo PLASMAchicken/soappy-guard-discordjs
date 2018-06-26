@@ -1,0 +1,3 @@
+{
+"ignore": ["Config/prefixes.json", "Config/botconfig.json" ]
+}
