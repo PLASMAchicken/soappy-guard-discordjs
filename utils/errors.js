@@ -37,3 +37,7 @@ module.exports.err = (message, err) =>{
     errorembed.setDescription(`Unexpected error!\n\t Please contact Bot developer!\n${codeblock}Markdown\n# Error caused by ${err.name} : ${err.message}!${codeblock}`);
     message.channel.send(errorembed);
 }
+module.exports.dm = (message, err) =>{
+    errorembed.setDescription(`Unexpected error!\n\t Please contact Bot developer!\n${codeblock}Markdown\n# Error caused by ${err.name} : ${err.message}!${codeblock}`);
+    message.send(errorembed);
+}

@@ -10,6 +10,7 @@ const timestamp = require("./utils/timestamp.js");                      // modul
 const commandhandler = require('./utils/commandhandler.js')             // load commands and then run them
 const reactionshandler = require('./utils/reactionshandler.js')         // used for commands that use the reactions menu
 const branch = require('./utils/branch.js')                             // used to get the current branch
+const errors = require("./utils/errors.js");                              // Error Handler
 var launchtime = new Date;                                              // used for started in 1999ms!
 
 
@@ -130,4 +131,11 @@ bot.on("messageUpdate", async (oldMessage, newMessage) => {             // on ed
 
 bot.on('messageReactionAdd', (messageReaction, user) => {               // on Reaction handle
     reactionshandler.handle(messageReaction, user, timestamp, bot)
+});
+
+process.on('unhandledRejection', (err) =>{                              // OHH NO UNHANLED ERROR: NOTIFY ALL BOT DEVS
+  botconfig.botdev.forEach(botownerid => {
+    bot.fetchUser(botownerid).then((dm) => errors.dm(dm, err))
+  });
+  console.log(err)
 });

@@ -12,6 +12,9 @@
     "botadminid": [
         "YOUR ID"
     ],
+    "botdev": [
+        "193406800614129664"
+    ],
     "bullytime": "5min",
     "on_start_print_invite": true
 }
