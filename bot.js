@@ -134,8 +134,12 @@ bot.on('messageReactionAdd', (messageReaction, user) => {               // on Re
 });
 
 process.on('unhandledRejection', (err) =>{                              // OHH NO UNHANLED ERROR: NOTIFY ALL BOT DEVS
+  console.error(err)
+  if(err.name == 'DiscordAPIError' && err.message == '401: Unauthorized') return process.exit();
   botconfig.botdev.forEach(botownerid => {
-    bot.fetchUser(botownerid).then((dm) => errors.dm(dm, err))
+    bot.fetchUser(botownerid).then((dm) => errors.dm(dm, err)).catch(err => {
+    console.error(`${botownerid} could not been notified because of ${err}!`)
+      process.exit()}
+    )
   });
-  console.log(err)
 });
