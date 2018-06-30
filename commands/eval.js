@@ -61,6 +61,7 @@ module.exports.help = {
     name: "eval",
     description: "eval a command!",
     usage: "eval <@>",
+    botadmin: botconfig.restrict_user_eval_to_admins
 }
 
 const header = (m, x) => {

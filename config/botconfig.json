@@ -16,5 +16,6 @@
         "193406800614129664"
     ],
     "bullytime": "5min",
-    "on_start_print_invite": true
+    "on_start_print_invite": true,
+    "restrict_user_eval_to_admins": true
 }
