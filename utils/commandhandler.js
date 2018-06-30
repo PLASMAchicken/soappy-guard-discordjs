@@ -54,13 +54,13 @@ module.exports.run = (message, bot, timestamp) => {                             
             }
         if(commandfile.help.botowner==true || commandfile.help.botadmin==true){                                                                        // if command requires bot owner => check
             if(commandfile.help.botowner==true){
-                if(hasbotperms.owner(message) != true){                                                                        // if not botowner => return
+                if(hasbotperms.owner(message.author, message) != true){                                                                        // if not botowner => return
                     console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${cmd} failed!: Not Bot Owner! `);
                     return
                 }
             }
             else if(commandfile.help.botadmin==true){
-                if(hasbotperms.admin(message) != true){                                                                        // if not botadmin => return
+                if(hasbotperms.admin(message.author, message) != true){                                                                        // if not botadmin => return
                     console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${cmd} failed!: Not Bot Admin! `);
                     return
                 }
