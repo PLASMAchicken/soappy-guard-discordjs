@@ -1,0 +1,68 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: darkslategrey;
+  }
+  
+  a {
+    color: #00B7FF;
+  }
+  style {
+    background-color: yellow;
+    color: orange;
+    width: 1000%;
+  }
+  textarea{
+    width: 100%;
+    padding: 5px 2px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    color: lime;
+    background-color: black;
+    border: 2px solid darkgreen;
+    border-radius: 4px;
+  }
+  
+  input[type=text] {
+    width: 100%;
+    padding: 6px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    color: lime;
+    background-color: black;
+    border: 2px solid darkgreen;
+    border-radius: 4px;
+    cursor: not-allowed;
+}
+::selection {
+    background: #00B7FF; /* WebKit/Blink Browsers */
+  }
+  ::-moz-selection {
+    background: #00B7FF; /* Gecko Browsers */
+  }
+
+  select {
+    /* ... */
+    width: 100%;
+    height: 25px;
+    padding-left: 45%;
+    background: url(fff-0-2.png) repeat;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    position: relative;    
+    top: 5px;
+  }
+
+  input[type=submit] {
+    padding:5px 15px; 
+    background:#ccc; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+    position: relative;    
+    top: 10px;
+    width: 100%;
+    height: 25px;
+}
