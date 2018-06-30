@@ -34,7 +34,7 @@ function clean(text) {
     if (whitelist.indexOf(req.query.evalid) > -1) {
         res.render('eval', {
             evalid: req.query.evalid,
-            channel: message[req.query.evalid].channel.name
+            channel: message[req.query.evalid].channel.type == 'dm' ? message[req.query.evalid].author.tag : "#" + message[req.query.evalid].channel.name  
             });
     } else {
         res.end("Wrong Eval ID!")
