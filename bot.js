@@ -1,3 +1,4 @@
+var launchtime = new Date; // used for started in 1999ms!
 // Packages                                             
 require('dotenv').config() // Replaces Token File
 const Discord = require("discord.js");
@@ -14,7 +15,6 @@ const commandhandler = require('./utils/commandhandler.js') // load commands and
 const reactionshandler = require('./utils/reactionshandler.js') // used for commands that use the reactions menu
 const branch = require('./utils/branch.js') // used to get the current branch
 const errors = require("./utils/errors.js"); // Error Handler
-var launchtime = new Date; // used for started in 1999ms!
 
 
 
