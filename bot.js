@@ -4,6 +4,9 @@ const Discord = require("discord.js");
 
 // Configs
 const botconfig = require("./config/botconfig.json"); // load bot config
+const defaultguildsettings = require("./config/defaultguildsettings.js"); // load bot config
+
+
 
 // Utils
 const timestamp = require("./utils/timestamp.js"); // module to give out timestamp like [07:00:00:300]
