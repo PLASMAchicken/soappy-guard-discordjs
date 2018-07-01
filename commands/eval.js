@@ -97,7 +97,7 @@ async function respond(message, result, bot, secured) {
     const key = await request.post(bot.haste + '/documents')
       .send(result)
       .then((r) => r.body.key);
-    await message.reply(`**Output was too long and was uploaded to ${bot.haste}/${key}.js**`);
+    await message.reply(`**Output was too long and was uploaded to ${bot.haste}${bot.haste.substring(bot.haste.length - 1) == '/' ? '' : '/'}${key}.js**`);
     console.log('hasted', `${bot.haste}/${key}.js`);
   } else {
     await message.channel.send(wrapped);
