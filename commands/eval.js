@@ -45,7 +45,7 @@ if(hasbotperms.owner(message.author) === true){
   header(message, content);
 
   try {
-    const result = await vm.runInNewContext(content)
+    const result = await vm.runInNewContext(content,{},{timeout: TIMEOUT})
     await respond(message, result.toString(), bot);
   } catch (err) {
     header(message, err);
