@@ -23,8 +23,19 @@ if(hasbotperms.owner(message.author) === true){
       args.shift()
       this.secured = true;
     }
-    const code = args.join(" ");
-    let evaled = eval(code)
+    let content = args.join(" ");
+    if(args[0] == "haste"){
+      if(!args[1]) return message.reply('to eval a haste upload your code to ' + bot.haste)
+      var data = await request.get(bot.haste + '/raw/' + args[1]);
+      content = data.body.toString();
+    }
+    console.log(content)
+    
+    if (cblockre.test(content)) {
+      content = content.replace(cblockre, '').trim();
+    }
+
+    let evaled = eval(content)
 
     if (typeof evaled !== "string")
       evaled = require("util").inspect(evaled);
@@ -36,6 +47,11 @@ if(hasbotperms.owner(message.author) === true){
 }else{
   'use strict';
   let content = args.join(" ");
+  if(args[0] == "haste"){
+    if(!args[1]) return message.reply('to eval a haste upload your code to ' + bot.haste)
+    var data = await request.get(bot.haste + '/raw/' + args[1]);
+    content = data.body.toString();
+  }
   console.log(content)
   
   if (cblockre.test(content)) {
