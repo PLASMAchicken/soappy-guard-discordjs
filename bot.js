@@ -5,7 +5,6 @@ const Discord = require("discord.js");
 
 // Configs
 const botconfig = require("./config/botconfig.json"); // load bot config
-const defaultguildsettings = require("./config/defaultguildsettings.js"); // load bot config
 
 
 
@@ -19,9 +18,6 @@ const errors = require("./utils/errors.js"); // Error Handler
 
 
 // WEB PART
-
-
-
 var app = require('./app');
 var debug = require('debug')('soappy-guard-discordjs:server');
 var http = require('http');
@@ -117,6 +113,12 @@ bot.commands = new Discord.Collection(); // Init Command Handler
 commandhandler.start(bot, timestamp); // Start Loading Commands
 bot.login(process.env.TOKEN); // login to Discord
 
+
+// Database
+const Enmap = require('enmap');
+const EnmapLevel = require('enmap-level');
+bot.guildsettings = new Enmap({ provider: new EnmapLevel({ name: 'guildsettings' })})
+bot.defaultguildsettings = require("./config/defaultguildsettings.js") // load bot config
 // events
 bot.on("ready", async () => { // when Bot Succesfullly loged into Discord
     console.log(`${timestamp()} ${bot.user.username} is online on ${bot.guilds.size} servers! \n${timestamp()} Bot started in ${bot.readyAt-launchtime}ms!`);

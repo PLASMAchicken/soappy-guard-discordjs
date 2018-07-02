@@ -11,21 +11,13 @@ let cooldown = new Set();
 
 module.exports.run = (message, bot, timestamp) => {                                                                 // commandhandler.run
         if (message.author.bot) return;                                                                             // message author =  bot => return
-        let prefixes = JSON.parse(fs.readFileSync("./config/prefixes.json", "utf8"));                               // load server prefixes
-        if (message.channel.type === "dm") {                                                                        // load dm prefix
-                prefixes['dm'] = {                                                                                   
-                prefixes: botconfig.prefix
-             };
-            var prefix = prefixes['dm'].prefixes;
+        if (message.channel.type === "text") {                                                                        
+            var guildConf = bot.guildsettings.get(message.guild.id) || bot.defaultguildsettings;
         }
-        else{                                                                                                       // Init Server Prefix if not dm
-            if (!prefixes[message.guild.id]) {
-                prefixes[message.guild.id] = {
-                prefixes: botconfig.prefix
-             };
-            }
-            var prefix = prefixes[message.guild.id].prefixes;
-        }                                                                                                           
+        else{
+            var guildConf = bot.defaultguildsettings;
+        }            
+        var prefix = guildConf.prefix;                                                                      
         if(message.content.startsWith(`<@!${bot.user.id}> `)) var prefix = `<@!${bot.user.id}> `;                     // if used @<bot> <cmd> init this prefix
         if (!message.content.startsWith(prefix)) return;                                                            // if message does not start with prefix => return
         if (cooldown.has(message.author.id)) {                                                                      // check if author still has cooldown 
@@ -39,6 +31,7 @@ module.exports.run = (message, bot, timestamp) => {                             
         if (!message.member.hasPermission("ADMINISTRATOR")) {                                                       // is in server => add cooldown if no admin perm
             cooldown.add(message.author.id);
         }}
+
         const args = message.content.slice(prefix.length).trim().split(/ +/g);                                      // split args
         const cmd = args.shift().toLowerCase();
         if(message.content.startsWith(`<@${bot.user.id}> `)){
