@@ -7,7 +7,9 @@ const help = require("../utils/help.js");
 
 // Configs
 const botconfig = require("../config/botconfig.json");
-let cooldown = new Set();
+
+const Discord = require("discord.js");
+
 
 module.exports.run = (message, bot, timestamp) => {                                                                 // commandhandler.run
         if (message.author.bot) return;                                                                             // message author =  bot => return
@@ -20,17 +22,6 @@ module.exports.run = (message, bot, timestamp) => {                             
         var prefix = guildConf.prefix;                                                                      
         if(message.content.startsWith(`<@!${bot.user.id}> `)) var prefix = `<@!${bot.user.id}> `;                     // if used @<bot> <cmd> init this prefix
         if (!message.content.startsWith(prefix)) return;                                                            // if message does not start with prefix => return
-        if (cooldown.has(message.author.id)) {                                                                      // check if author still has cooldown 
-            message.delete();
-            return message.reply(`You have to wait ${botconfig.cooldownseconds} seconds between commands.`)         // if so => return
-        }
-        if (message.channel.type === "dm") {                                                                        // is in dm => add cooldown
-            cooldown.add(message.author.id);
-        }
-        else{
-        if (!message.member.hasPermission("ADMINISTRATOR")) {                                                       // is in server => add cooldown if no admin perm
-            cooldown.add(message.author.id);
-        }}
 
         const args = message.content.slice(prefix.length).trim().split(/ +/g);                                      // split args
         const cmd = args.shift().toLowerCase();
@@ -59,11 +50,34 @@ module.exports.run = (message, bot, timestamp) => {                             
                 }
             }  
         }
+        if (!bot.cooldowns.has(commandfile.help.name)) {
+            bot.cooldowns.set(commandfile.help.name, new Discord.Collection());
+            }
+    
+            const now = Date.now();
+            const timestamps = bot.cooldowns.get(commandfile.help.name);
+            const cooldownAmount = (commandfile.help.cooldown || 3) * 1000;
+    
+            if (!timestamps.has(message.author.id)) {
+                timestamps.set(message.author.id, now);
+                setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+            }
+            else {
+                const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+    
+                if (now < expirationTime) {
+                    const timeLeft = (expirationTime - now) / 1000;
+                    timestamps.set(message.author.id, now + (commandfile.help.cooldown || 3) * 1000);
+                    return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${commandfile.help.name}\` command.`);
+                }
+    
+                timestamps.set(message.author.id, now);
+                setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+            }
+
+
         message.channel.startTyping();                                                                               // everyhing is working => start typing
         commandfile.run(bot, message, args).then(message.channel.stopTyping());                                     // run command => then stop typing
-        setTimeout(() => {                                                                                          // init cooldown
-            cooldown.delete(message.author.id)
-        }, botconfig.cooldownseconds * 1000)
     }}
 
 
