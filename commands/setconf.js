@@ -11,16 +11,11 @@ module.exports.run = async (bot, message, args) => {
     if(!guildConf.hasOwnProperty(key)) return message.reply("This key is not in the configuration.");
     guildConf[key] = value;
     bot.guildsettings.set(message.guild.id, guildConf)
-
-
-
     let sEmbed = new Discord.RichEmbed()
         .setColor("#FF9900")
         .setTitle(`${key} set!`)
         .setDescription(`Guild configuration item ${key} has been changed to:\n\`\`\`${value}\`\`\``);
-
     message.channel.send(sEmbed);
-
 }
 
 module.exports.help = {
