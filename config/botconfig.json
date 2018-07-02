@@ -3,15 +3,15 @@
     "pooltime": 3000,
     "botownerserverid": "432245883619508224",
     "cooldownseconds": "5",
-    "botownerid": [
+    "botowners": [
         "193406800614129664",
         "YOUR ID",
         "447790361990135811"
     ],
-    "botadminid": [
+    "botadmins": [
         "YOUR ID"
     ],
-    "botdev": [
+    "botdevs": [
         "193406800614129664"
     ],
     "on_start_print_invite": true,

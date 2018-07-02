@@ -14,8 +14,7 @@ const timestamp = require("./utils/timestamp.js"); // module to give out timesta
 const commandhandler = require('./utils/commandhandler.js') // load commands and then run them
 const reactionshandler = require('./utils/reactionshandler.js') // used for commands that use the reactions menu
 const branch = require('./utils/branch.js') // used to get the current branch
-const errors = require("./utils/errors.js"); // Error Handler
-
+const notify = require("./utils/notifybot.js"); // Error Handler
 
 
 // WEB PART
@@ -158,10 +157,5 @@ bot.on("guildMemberAdd", member => {
 process.on('unhandledRejection', (err) => { // OHH NO UNHANLED ERROR: NOTIFY ALL BOT DEVS
     console.error(err)
     if (err.name == 'DiscordAPIError' && err.message == '401: Unauthorized') return process.exit();
-    botconfig.botdev.forEach(botownerid => {
-        bot.fetchUser(botownerid).then((dm) => errors.dm(dm, err)).catch(err => {
-            console.error(`${botownerid} could not been notified because of ${err}!`)
-            process.exit()
-        })
-    });
+    notify(bot, 'botdevs', err)
 });
