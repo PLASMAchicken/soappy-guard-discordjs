@@ -1,5 +1,4 @@
 {
-    "prefix": "!",
     "tempmsg": 10000,
     "pooltime": 3000,
     "botownerserverid": "432245883619508224",
@@ -15,7 +14,7 @@
     "botdev": [
         "193406800614129664"
     ],
-    "bullytime": "5min",
     "on_start_print_invite": true,
-    "restrict_user_eval_to_admins": true
+    "restrict_user_eval_to_admins": true,
+    "no_node_ver_check" : false
 }
