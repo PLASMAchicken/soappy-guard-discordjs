@@ -140,6 +140,18 @@ bot.on('messageReactionAdd', (messageReaction, user) => { // on Reaction handle
     reactionshandler.handle(messageReaction, user, timestamp, bot)
 });
 
+bot.on("guildCreate", guild => {
+    bot.settings.set(guild.id, bot.defaultGuildSettings);
+  });
+
+bot.on("guildMemberAdd", member => {
+    let welcomeMessage = bot.settings.getProp(member.guild.id, "welcomeMessage");
+    welcomeMessage = welcomeMessage.replace("{{user}}", member.user.tag)
+    member.guild.channels
+      .find("name", bot.settings.getProp(member.guild.id, "welcomeChannel"))
+      .send(welcomeMessage)
+  });
+
 process.on('unhandledRejection', (err) => { // OHH NO UNHANLED ERROR: NOTIFY ALL BOT DEVS
     console.error(err)
     if (err.name == 'DiscordAPIError' && err.message == '401: Unauthorized') return process.exit();
