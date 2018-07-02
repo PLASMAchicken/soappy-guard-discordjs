@@ -148,11 +148,11 @@ bot.on("guildCreate", guild => {
   });
 
 bot.on("guildMemberAdd", member => {
-    let welcomeMessage = bot.settings.getProp(member.guild.id, "welcomeMessage");
+    let welcomeMessage = bot.guildsettings.getProp(member.guild.id, "welcomeMessage");
+    let welcomeChannel = member.guild.channels.find('name', bot.guildsettings.getProp(member.guild.id, "welcomeChannel"))
+    if(!welcomeChannel || !welcomeMessage) return;
     welcomeMessage = welcomeMessage.replace("{{user}}", member.user.tag)
-    member.guild.channels
-      .find("name", bot.settings.getProp(member.guild.id, "welcomeChannel"))
-      .send(welcomeMessage)
+    welcomeChannel.send(welcomeMessage)
   });
 
 process.on('unhandledRejection', (err) => { // OHH NO UNHANLED ERROR: NOTIFY ALL BOT DEVS
