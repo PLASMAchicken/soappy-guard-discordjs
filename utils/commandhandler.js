@@ -19,14 +19,11 @@ module.exports.run = (message, bot, timestamp) => {                             
         else{
             var guildConf = bot.defaultguildsettings;
         }            
-        var prefix = guildConf.prefix;                                                                      
-        if(message.content.startsWith(`<@!${bot.user.id}> `)) var prefix = `<@!${bot.user.id}> `;                     // if used @<bot> <cmd> init this prefix
-        if (!message.content.startsWith(prefix)) return;                                                            // if message does not start with prefix => return
-
-        const args = message.content.slice(prefix.length).trim().split(/ +/g);                                      // split args
+        const prefixRegex = new RegExp(`^(<@!?${bot.user.id}>|\\${guildConf.prefix})\\s*`);
+        if (!prefixRegex.test(message.content)) return;
+        const [, matchedPrefix] = message.content.match(prefixRegex);
+        const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
         const cmd = args.shift().toLowerCase();
-        if(message.content.startsWith(`<@${bot.user.id}> `)){
-        }
         let commandfile = bot.commands.get(cmd);                                               // get command ( !ping ) and subtract prefix (= ping) and find command
         if (commandfile) {
             if (message.channel.type === "dm") {
