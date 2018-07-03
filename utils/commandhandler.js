@@ -74,7 +74,7 @@ module.exports.run = (message, bot, timestamp) => {                             
 
 
         message.channel.startTyping();                                                                               // everyhing is working => start typing
-        commandfile.run(bot, message, args).then(message.channel.stopTyping());                                     // run command => then stop typing
+        commandfile.run(bot, message, args, guildConf).then(message.channel.stopTyping(true));                                     // run command => then stop typing
     }}
 
 
