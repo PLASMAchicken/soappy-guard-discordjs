@@ -1,5 +1,6 @@
 // Packages
 const fs = require("fs");
+const ms = require("ms");
 
 // Utils
 const hasbotperms = require("../utils/hasbotperms.js")
@@ -53,7 +54,7 @@ module.exports.run = (message, bot, timestamp) => {                             
     
             const now = Date.now();
             const timestamps = bot.cooldowns.get(commandfile.help.name);
-            const cooldownAmount = (commandfile.help.cooldown || 3) * 1000;
+            const cooldownAmount = ms(commandfile.help.cooldown || botconfig.cooldown);
     
             if (!timestamps.has(message.author.id)) {
                 timestamps.set(message.author.id, now);
@@ -63,9 +64,8 @@ module.exports.run = (message, bot, timestamp) => {                             
                 const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
     
                 if (now < expirationTime) {
-                    const timeLeft = (expirationTime - now) / 1000;
-                    timestamps.set(message.author.id, now + (commandfile.help.cooldown || 3) * 1000);
-                    return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${commandfile.help.name}\` command.`);
+                    const timeLeft = ms(expirationTime - now, {long: true})
+                    return message.reply(`please wait \`${timeLeft}\` before reusing the \`${commandfile.help.name}\` command.`);
                 }
     
                 timestamps.set(message.author.id, now);

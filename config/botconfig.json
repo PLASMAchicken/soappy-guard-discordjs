@@ -2,7 +2,7 @@
     "tempmsg": 10000,
     "pooltime": 3000,
     "botownerserverid": "432245883619508224",
-    "cooldownseconds": "5",
+    "cooldown": "5s",
     "botowners": [
         "193406800614129664",
         "447790361990135811"
