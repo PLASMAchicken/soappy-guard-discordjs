@@ -48,10 +48,9 @@ module.exports.run = (message, bot, timestamp) => {                             
                 }
             }  
         }
-        if (!bot.cooldowns.has(commandfile.help.name)) {
+        if (require("util").inspect(bot.cooldowns.get(commandfile.help.name))== '{}' || !bot.cooldowns.has(commandfile.help.name)) {
             bot.cooldowns.set(commandfile.help.name, new Discord.Collection());
             }
-    
             const now = Date.now();
             const timestamps = bot.cooldowns.get(commandfile.help.name);
             const cooldownAmount = ms(commandfile.help.cooldown || botconfig.cooldown);
@@ -71,7 +70,6 @@ module.exports.run = (message, bot, timestamp) => {                             
                 timestamps.set(message.author.id, now);
                 setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
             }
-
 
         message.channel.startTyping();                                                                               // everyhing is working => start typing
         commandfile.run(bot, message, args, guildConf).then(message.channel.stopTyping(true));                                     // run command => then stop typing
