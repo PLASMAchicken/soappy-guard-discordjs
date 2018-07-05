@@ -4,7 +4,7 @@ module.exports.owner = (user, message) => {
     for (var i = 0; i < botconfig.botowners.length; i++) {
         if (botconfig.botowners[i] === user.id) return true;
     }
-    if (message) message.channel.send("Boi this is only for ma Owna or Admins!");
+    if (message) message.channel.send("Boi this is only for ma Owna!");
     return false;
 }
 
