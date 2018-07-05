@@ -1,21 +1,18 @@
 {
-    "prefix": "!",
     "tempmsg": 10000,
     "pooltime": 3000,
     "botownerserverid": "432245883619508224",
-    "cooldownseconds": "5",
-    "botownerid": [
+    "cooldown": "5s",
+    "botowners": [
         "193406800614129664",
-        "YOUR ID",
         "447790361990135811"
     ],
-    "botadminid": [
-        "YOUR ID"
-    ],
-    "botdev": [
+    "botadmins": [
         "193406800614129664"
     ],
-    "bullytime": "5min",
+    "botdevs": [
+        "193406800614129664"
+    ],
     "on_start_print_invite": true,
-    "restrict_user_eval_to_admins": true
+    "no_node_ver_check" : false
 }
