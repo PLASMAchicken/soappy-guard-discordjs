@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args, guildConf) => {
     let sEmbed = new Discord.RichEmbed()
         .setColor("RANDOM")
         .setTitle(`Guild Configuration:`)
-        .setDescription("```" +  require("util").inspect(guildConf) + "```");
+        .setDescription("```js\n" +  require("util").inspect(guildConf) + "\n```");
     message.channel.send(sEmbed);
 
 }
