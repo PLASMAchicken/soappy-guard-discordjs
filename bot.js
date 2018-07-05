@@ -7,7 +7,7 @@ const Discord = require("discord.js");
 const botconfig = require("./config/botconfig.json"); // load bot config
 
 // Node Ver Check
-if(process.version.charAt(1) != 1 && process.version.charAt(1) <= 7 && botconfig.no_node_ver_check != true) throw 'Please use Node Version 7 or above!'
+if(process.version.charAt(1) != 1 && process.version.charAt(1) <= 8 && botconfig.no_node_ver_check != true) throw 'Please use Node Version 8 or above!'
 
 // Utils
 const timestamp = require("./utils/timestamp.js"); // module to give out timestamp like [07:00:00:300]
