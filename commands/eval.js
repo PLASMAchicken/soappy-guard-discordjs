@@ -3,20 +3,14 @@ let errors = require("../utils/errors.js");
 const Discord = require("discord.js");
 const request = require('snekfetch');
 let botconfig = require("../config/botconfig.json");
-const vm = require('vm')
 
 const TIMEOUT = 6000;
 
 const cblockre = /(^```js)|(```$)/g;
 
-
-
-
-
-
 module.exports.run = async (bot, message, args) => {
 
-if(hasbotperms.owner(message.author) === true){
+if(hasbotperms.owner(message.author, message) === true){
     
   try {
     if(args[0] == "secured"){
@@ -43,41 +37,14 @@ if(hasbotperms.owner(message.author) === true){
   } catch (err) {
     message.channel.send(`\`ERROR\` \`\`\`xl\n${err}\n\`\`\``);
   }
-
-}else{
-  'use strict';
-  let content = args.join(" ");
-  if(args[0] == "haste"){
-    if(!args[1]) return message.reply('to eval a haste upload your code to ' + bot.haste)
-    var data = await request.get(bot.haste + '/raw/' + args[1]);
-    content = data.body.toString();
-  }
-  console.log(content)
-  
-  if (cblockre.test(content)) {
-    content = content.replace(cblockre, '').trim();
-  }
-
-  header(message, content);
-
-  try {
-    const result = await vm.runInNewContext(content,{},{timeout: TIMEOUT})
-    await respond(message, result.toString(), bot);
-  } catch (err) {
-    header(message, err);
-    await respond(message, err.message);
-  }
-}
-
-
-}
+}}
 
 
 module.exports.help = {
     name: "eval",
     description: "eval a command!",
     usage: "eval <@>",
-    botadmin: botconfig.restrict_user_eval_to_admins
+    botowner: true
 }
 
 const header = (m, x) => {
@@ -105,4 +72,3 @@ async function respond(message, result, bot, secured) {
   }
   header(message);
 }
-
