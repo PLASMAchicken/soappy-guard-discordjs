@@ -19,6 +19,7 @@
     "dotenv": "^5.0.1",
     "enmap": "^2.6.3",
     "enmap-level": "^2.1.0",
+    "eslint": "^5.0.1",
     "express": "~4.16.0",
     "express-validator": "^5.2.0",
     "http-errors": "~1.6.2",
