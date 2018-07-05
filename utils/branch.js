@@ -1,11 +1,12 @@
-const fs = require("fs");
+const fs = require('fs');
 
 module.exports = () => {
-    try{
-    let data = fs.readFileSync('.git/HEAD', 'utf8')
+	try{
+		let data = fs.readFileSync('.git/HEAD', 'utf8');
 
-    data = /ref: refs\/heads\/([^\n]+)/.exec(data.toString());
-    return data[1] 
-}catch (err){console.error(err.message)}
+		data = /ref: refs\/heads\/([^\n]+)/.exec(data.toString());
+		return data[1];
+	}
+	catch (err) {console.error(err.message);}
 
-}
+};
