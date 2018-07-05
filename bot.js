@@ -117,9 +117,10 @@ bot.login(process.env.TOKEN); // login to Discord
 // Database
 const Enmap = require('enmap');
 const EnmapLevel = require('enmap-level');
+bot.cooldowns = new Enmap({ provider: new EnmapLevel({ name: 'cooldowns' })});
 bot.guildsettings = new Enmap({ provider: new EnmapLevel({ name: 'guildsettings' })})
 bot.defaultguildsettings = require("./config/defaultguildsettings.js") // load bot config
-bot.cooldowns = new Enmap({ provider: new EnmapLevel({ name: 'cooldowns' })});
+
 
 // events
 bot.on("ready", async () => { // when Bot Succesfullly loged into Discord
