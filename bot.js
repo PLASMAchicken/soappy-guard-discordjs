@@ -119,6 +119,7 @@ const EnmapLevel = require('enmap-level');
 bot.cooldowns = new Enmap({ provider: new EnmapLevel({ name: 'cooldowns' }) });
 bot.guildsettings = new Enmap({ provider: new EnmapLevel({ name: 'guildsettings' }) });
 bot.userdata = new Enmap({ provider: new EnmapLevel({ name: 'userdata' }) });
+bot.tags = new Enmap({ provider: new EnmapLevel({ name: 'tags' }) });
 bot.defaultguildsettings = require('./config/defaultguildsettings.js'); // load bot config
 
 
