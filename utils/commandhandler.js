@@ -34,8 +34,8 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 						if(err.code != 50007) console.error(err);
 					});
 				}
+				message.delete(2500);
 			}
-			message.delete(2500);
 		}
 		if (message.channel.type === 'dm') {
 			if(commandfile.help.disableindm == true)return message.channel.send('Sorry this Command is not yet supported!'); // check if command is supported in dm if not => return
