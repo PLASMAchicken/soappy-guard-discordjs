@@ -52,7 +52,6 @@ module.exports.run = (message, bot, timestamp) => { // commandhandler.run
 		const cooldowns = bot.cooldowns.get(message.author.id);
 		if(!cooldowns[commandfile.help.name]) {
 			cooldowns[commandfile.help.name] = now - cooldownAmount;
-			console.log('reset');
 		}
 		const cooldown = bot.cooldowns.get(message.author.id)[commandfile.help.name];
 		const expirationTime = cooldown + cooldownAmount;
