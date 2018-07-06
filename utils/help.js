@@ -1,7 +1,5 @@
 const Discord = require('discord.js');
-const botconfig = require('../config/botconfig.json');
 const colorer = require('../config/color.json');
-const fs = require('fs');
 
 
 const helpembed = new Discord.RichEmbed();
@@ -10,7 +8,7 @@ helpembed.setColor(colorer.help);
 
 module.exports.add = (module, description, hide) => {
 	if(hide == true) {return;}
-	helpembed.addField(module, description);
+	//helpembed.addField(module, description);
 };
 
 module.exports.send = (message) => {
