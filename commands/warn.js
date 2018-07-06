@@ -12,12 +12,16 @@ module.exports.run = async (bot, message, args, guildConf) => {
 	if(!userdata.warns) {
 		userdata.warns = {};
 	}
-	userdata.warns[warnid] = warn;
+	userdata.warns[warnid] = {};
+	userdata.warns[warnid].reason = warn;
+	userdata.warns[warnid].moderator = message.author.id;
+	userdata.warns[warnid].guild = message.guild.id;
 	bot.userdata.set(towarn.id, userdata);
 	const warnembed = new Discord.RichEmbed()
 		.setTitle(towarn.user.tag + ' warned!')
 		.setDescription(`[${warnid}] : ${warn}`)
-		.setColor('RANDOM');
+		.setColor('RANDOM')
+		.setFooter(`User now has ${Object.keys(bot.userdata.get(message.author.id)['warns']).length} global warns!`);
 	message.channel.send(warnembed);
 };
 

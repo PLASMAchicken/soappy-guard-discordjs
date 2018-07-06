@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
 	if(bot.userdata.get(user.id)) {
 		const warns = bot.userdata.get(user.id).warns || {};
 		for(const key in warns) {
-			warnembed.addField(key, warns[key], true);
+			warnembed.addField(key, warns[key].reason + '\n' + (warns[key].guild == message.guild.id ? '[this guild]' : '[' + warns[key].guild + ']') + '\n[' + (bot.guilds.get(warns[key].guild) == '' ? bot.guilds.get(warns[key].guild).name : 'Non resovleable Guild!') + ']', true);
 		}
 	}
 	else {warnembed.setDescription('No Warns Logged!');}
