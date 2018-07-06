@@ -1,7 +1,7 @@
 const helpembed = require('../utils/help.js');
 const ms = require('ms');
 
-module.exports.run = async (bot, message, args, guildConf) => {
+module.exports.run = (bot, message, args, guildConf) => {
 	if(!args.length) return helpembed.send(message);
 	const command = bot.commands.get(args.join(' ').toLowerCase());
 	if (!command) return message.reply('that\'s not a valid command!');

@@ -4,7 +4,17 @@ const colorer = require('../config/color.json'); // For color
 const uptime = require('../utils/uptime.js'); // For uptime
 const branch = require('../utils/branch.js'); // For current branch
 
-module.exports.run = async (bot, message) => {
+module.exports.run = (bot, message) => {
+	botinfo(bot, message);
+};
+
+module.exports.help = {
+	name: 'botinfo',
+	description: 'Shows you the Bot Info',
+	usage: 'botinfo',
+};
+
+async function botinfo(bot, message) {
 	const m = await message.channel.send('Calculating BotInfo Please stand by!');
 	const inline = true;
 	const bicon = bot.user.displayAvatarURL;
@@ -31,10 +41,4 @@ module.exports.run = async (bot, message) => {
 	await m.edit('calculating ping.');
 	await botembed.addField('Ping:', `Latency is ${m.createdTimestamp - message.createdTimestamp}ms.\nAPI Latency is ${Math.round(bot.ping)}ms!\nLatency between receiving and sending is ${m.editedTimestamp - message.createdTimestamp} ms! `);
 	await m.edit(botembed);
-};
-
-module.exports.help = {
-	name: 'botinfo',
-	description: 'Shows you the Bot Info',
-	usage: 'botinfo',
-};
+}

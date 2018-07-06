@@ -43,7 +43,6 @@ module.exports.help = {
 	description: 'eval a command!',
 	usage: 'eval <@>',
 	botowner: true,
-	cooldown: '1ms',
 };
 
 const header = (m, x) => {

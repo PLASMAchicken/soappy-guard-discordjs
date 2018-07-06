@@ -2,7 +2,7 @@ const ms = require('ms');
 const errors = require('../utils/errors.js');
 const config = require('../config/botconfig.json');
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = (bot, message, args) => {
 	try {
 		const time = config.bullytime;
 		const tobully = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));

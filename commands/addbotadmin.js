@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = (bot, message, args) => {
 	const kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
 	if(kUser) {
 		const obj = require('../config/botconfig.json');

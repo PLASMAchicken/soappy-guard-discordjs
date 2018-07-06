@@ -1,5 +1,5 @@
 const Discord = require('discord.js'); // For Embed
-module.exports.run = async (bot, msg) => {
+module.exports.run = (bot, msg) => {
 	if(!msg.mentions.users.first()) return msg.reply('Specify atleast one User!');
 	msg.mentions.users.forEach(u => {
 		const embed = new Discord.RichEmbed()
@@ -16,3 +16,4 @@ module.exports.help = {
 	usage: '-',
 	botowner: true,
 };
+

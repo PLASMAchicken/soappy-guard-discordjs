@@ -9,7 +9,7 @@ const help = require('../utils/help.js');
 // Configs
 const botconfig = require('../config/botconfig.json');
 
-module.exports.run = (message, bot, timestamp) => { // commandhandler.run
+module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 	if (message.author.bot) return; // message author =  bot => return
 	let guildConf;
 	if (message.channel.type === 'text') {
@@ -63,7 +63,14 @@ module.exports.run = (message, bot, timestamp) => { // commandhandler.run
 		bot.cooldowns.set(message.author.id, cooldowns);
 
 		message.channel.startTyping(); // everyhing is working => start typing
-		commandfile.run(bot, message, args, guildConf).then(message.channel.stopTyping(true)); // run command => then stop typing
+		try {
+			commandfile.run(bot, message, args, guildConf); // run command => then stop typing
+		}
+		catch (error) {
+			console.error(error);
+			message.reply(`Oh no there was an error trying to executing ${commandfile.help.name}!\nBut don't worry we will try to fix it!\nIf you have any info for us please do !request ${commandfile.name} broke when I did: `);
+		}
+		message.channel.stopTyping(true);
 	}
 };
 module.exports.start = (bot, timestamp) => { // load commands from command dir

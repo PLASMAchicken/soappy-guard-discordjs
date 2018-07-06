@@ -4,7 +4,7 @@ const helper = require('../utils/help.js');
 const spliter = require('../utils/split.js');
 
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = (bot, message, args) => {
 
 
 	if(args[0] == 'help') {
