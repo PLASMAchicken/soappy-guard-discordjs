@@ -145,7 +145,7 @@ bot.on('messageReactionAdd', (messageReaction, user) => { // on Reaction handle
 });
 
 bot.on('guildCreate', guild => {
-	bot.settings.set(guild.id, bot.defaultGuildSettings);
+	bot.guildsettings.set(guild.id, bot.defaultguildsettings);
 });
 
 bot.on('guildMemberAdd', member => {
