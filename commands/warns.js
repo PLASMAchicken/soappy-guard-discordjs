@@ -5,11 +5,13 @@ module.exports.run = async (bot, message, args) => {
 	const warnembed = new Discord.RichEmbed()
 		.setColor('RANDOM')
 		.setTitle(user.tag + '\'s warns:');
-	const warns = bot.userdata.get(user.id).warns;
-	for(const key in warns) {
-		warnembed.addField(key, warns[key], true);
+	if(bot.userdata.get(user.id)) {
+		const warns = bot.userdata.get(user.id).warns || {};
+		for(const key in warns) {
+			warnembed.addField(key, warns[key], true);
+		}
 	}
-
+	else {warnembed.setDescription('No Warns Logged!');}
 	message.channel.send(warnembed);
 
 };
