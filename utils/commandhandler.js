@@ -90,7 +90,7 @@ module.exports.start = (bot, timestamp) => { // load commands from command dir
 			const props = require(`../commands/${f}`); // => load each one
 
 			console.log(`${timestamp()} ${f} loaded!`); // => log that command got loaded
-			help.add(props.help.name, props.help.description, props.help.hideinhelp); // => add command info to help
+			help.add(props.help.name, props.help.description, props.help.usage, props.help.hideinhelp); // => add command info to help
 			bot.commands.set(props.help.name, props); // => add command to command list
 		}); // => close commandhandler and start bot
 	});

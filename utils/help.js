@@ -1,23 +1,32 @@
-const Discord = require('discord.js');
-const colorer = require('../config/color.json');
+const commands = [];
 
 
-const helpembed = new Discord.RichEmbed();
-helpembed.setTitle(' Help Document');
-helpembed.setColor(colorer.help);
+commands.push('Here\'s a list of all my commands:');
+commands.push('\nYou can send `help [command name]` to get info on a specific command!\n');
 
-module.exports.add = (module, description, hide) => {
+
+module.exports.add = (module, description, usage, hide) => {
 	if(hide == true) {return;}
-	//helpembed.addField(module, description);
+	commands.push(`Command: ${module}\n\tDescription: ${description}\n\tUsage: ${usage}\n`);
 };
 
 module.exports.send = (message) => {
-	message.channel.send(helpembed);
+	return message.author.send(commands, { split: true, code: 'markdown' })
+		.then(() => {
+			if (message.channel.type === 'dm') return;
+			message.reply('I\'ve sent you a DM with all my commands!');
+		})
+		.catch(error => {
+			console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
+			message.reply('it seems like I can\'t DM you! Do you have DMs disabled?');
+		});
 };
 
 module.exports.embedhelp = (message) => {
-
-	helpembed.setTitle('HelpDocument for !embed')
+	const helpembed = new require('dicsord.js').RichEmbed()
+		.setTitle(' Help Document')
+		.setColor('RANDOM')
+		.setTitle('HelpDocument for !embed')
 		.setDescription('Usage: !embed cmd1=arg1 | cmd2=arg1=arg2 | cmd3=arg1=arg2=arg3 \nCan be mixed! \nLike !embed description=something | field=sometitle=somedesc | title=Main Title')
 		.addBlankField()
 		.addField('title=title', 'Defines the Title!')
