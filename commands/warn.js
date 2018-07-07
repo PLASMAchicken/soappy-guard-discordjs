@@ -9,6 +9,7 @@ module.exports.run = async (bot, message, args, guildConf) => {
 	const userdata = bot.userdata.get(towarn.id) || {};
 	const warnid = SnowflakeUtil.generate();
 	const warn = args.slice(1).join(' ');
+	if(args.slice(1).length == 0) return message.reply('Please add a valid reason!');
 	if(!userdata.warns) {
 		userdata.warns = {};
 	}
@@ -21,7 +22,7 @@ module.exports.run = async (bot, message, args, guildConf) => {
 		.setTitle(towarn.user.tag + ' warned!')
 		.setDescription(`[${warnid}] : ${warn}`)
 		.setColor('RANDOM')
-		.setFooter(`User now has ${Object.keys(bot.userdata.get(message.author.id)['warns']).length} global warns!`);
+		.setFooter(`User now has ${Object.keys(bot.userdata.get(towarn.id)['warns']).length} global warns!`);
 	message.channel.send(warnembed);
 };
 
