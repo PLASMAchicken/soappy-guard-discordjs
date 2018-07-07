@@ -13,7 +13,6 @@ module.exports.run = (bot, message, args) => {
 	const embed = new Discord.RichEmbed();
 	embed.setAuthor(message.author.username, message.author.avatarURL);
 	const data = spliter(args);
-	console.log('EMBED DATA: ' + data);
 	for (let i = 0; i < data.length; i++) {
 		switch(data[i][0]) {
 		case 'title':
