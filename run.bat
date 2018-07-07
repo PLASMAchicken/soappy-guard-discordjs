@@ -1,2 +1,2 @@
-nodemon --config .\config\nodemon.Json -V bot.js
+nodemon --config .\config\nodemon.Json -V start.js
 pause

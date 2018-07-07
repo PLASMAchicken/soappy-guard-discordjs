@@ -125,6 +125,10 @@ bot.defaultguildsettings = require('./config/defaultguildsettings.js'); // load 
 
 // events
 bot.on('ready', async () => { // when Bot Succesfullly loged into Discord
+	if(!bot.shard || bot.shard.count != 1) {
+		console.error(timestamp() + ' Please start the bot using start.js!');
+		return process.exit();
+	}
 	console.log(`${timestamp()} ${bot.user.username} is online on ${bot.guilds.size} servers! \n${timestamp()} Bot started in ${bot.readyAt - launchtime}ms!`);
 	bot.user.setActivity(`${bot.guilds.size} servers${branch() ? `, on ${branch()} branch` : ''}!`, {
 		type: 'WATCHING',
