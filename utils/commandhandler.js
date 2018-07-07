@@ -29,12 +29,12 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 			const botchannel = message.guild.channels.find('name', guildConf.botChannel);
 			if(botchannel) {
 				if(message.channel.name !== guildConf.botChannel) {
-					return message.author.send(`You can only use this bot in ${botchannel}!`).catch(err =>{
-						message.reply(`Please only use commands this bot in  ${botchannel}!`).then(msg => msg.delete(6000));
+					message.delete(0).catch(err => console.log(err));
+					return message.author.send(`You can only use ${message.cleanContent} in ${botchannel}!`).catch(err =>{
+						message.reply(`Please only use commands ${message.cleanContent} in  ${botchannel}!`).then(msg => msg.delete(6000));
 						if(err.code != 50007) console.error(err);
 					});
 				}
-				message.delete(2500);
 			}
 		}
 		if (message.channel.type === 'dm') {
