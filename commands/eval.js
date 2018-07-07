@@ -1,3 +1,4 @@
+/* eslint no-unused-vars: 0  */
 const hasbotperms = require('../utils/hasbotperms.js');
 const Discord = require('discord.js');
 const request = require('snekfetch');
