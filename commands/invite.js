@@ -11,4 +11,5 @@ module.exports.help = {
 	description: 'Add Bot to Server!',
 	usage: 'invite',
 	botowner: true,
+	aliases: ['inv'],
 };

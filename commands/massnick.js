@@ -23,4 +23,5 @@ module.exports.help = {
 	description: 'Change everybodys nick!',
 	usage: 'massnick <new name>',
 	disableindm: true,
+	aliases: ['ms'],
 };

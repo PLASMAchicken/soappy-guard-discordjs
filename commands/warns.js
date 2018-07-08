@@ -23,4 +23,5 @@ module.exports.help = {
 	name: 'warns',
 	description: 'check your warns',
 	usage: 'warns <@>',
+	aliases: ['strikes'],
 };

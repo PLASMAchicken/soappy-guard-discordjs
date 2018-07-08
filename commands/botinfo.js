@@ -12,6 +12,7 @@ module.exports.help = {
 	name: 'botinfo',
 	description: 'Shows you the Bot Info',
 	usage: 'botinfo',
+	aliases: ['info', 'bot'],
 };
 
 async function botinfo(bot, message) {

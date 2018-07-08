@@ -13,8 +13,9 @@ module.exports.run = async (bot, message, args, guildConf) => {
 };
 
 module.exports.help = {
-	name: 'serverconf',
+	name: 'serverconfig',
 	description: 'Lists ServerConf',
-	usage: 'serverconf',
+	usage: 'serverconfig',
 	disableindm: true,
+	aliases: ['sc'],
 };

@@ -82,4 +82,5 @@ module.exports.help = {
 	description: 'eval a command!',
 	usage: 'webeval',
 	botowner: true,
+	aliases: ['we'],
 };

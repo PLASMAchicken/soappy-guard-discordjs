@@ -45,6 +45,7 @@ module.exports.help = {
 	usage: 'eval <@>',
 	botowner: true,
 	cooldown: '1ms',
+	aliases: ['e'],
 };
 
 const header = (m, x) => {

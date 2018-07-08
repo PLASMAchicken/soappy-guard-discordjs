@@ -38,4 +38,5 @@ module.exports.help = {
 	hideinhelp: false,
 	usage: 'selfdestroy <time> <msg>',
 	disableindm: true,
+	aliases: ['sd'],
 };

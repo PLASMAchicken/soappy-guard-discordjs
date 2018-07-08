@@ -31,4 +31,5 @@ module.exports.help = {
 	name: 'warn',
 	description: 'warn somebody bad!',
 	usage: 'warn <@|id> <Why ;(>',
+	aliases: ['strike'],
 };

@@ -4,7 +4,7 @@ const errors = require('../utils/errors.js');
 module.exports.run = async (bot, message, args, guildConf) => {
 	const adminRole = message.guild.roles.find('name', guildConf.adminRole);
 	if (!adminRole || !message.member.roles.has(adminRole.id)) return errors.noPerms(message, guildConf.adminRole + 'role');
-	if (!args[0] || args[0 == 'help']) return message.reply(`Usage: ${this.help.name} <key> <new value>`);
+	if (!args[0] || args[0 == 'help']) return message.reply(`Usage: ${guildConf.prefix}${this.help.name} <key> <new value>`);
 	const key = args.shift();
 	const value = args.join(' ');
 	if(!guildConf.hasOwnProperty(key)) return message.reply('This key is not in the configuration.');
@@ -18,8 +18,9 @@ module.exports.run = async (bot, message, args, guildConf) => {
 };
 
 module.exports.help = {
-	name: 'setconf',
+	name: 'setconfig',
 	description: 'Sets the ServerSpecific Settings',
 	usage: 'setconf <key> <new value>',
 	disableindm: true,
+	aliases: ['setconf', 'setserconf', 'setserverconf', 'setserverconfig'],
 };

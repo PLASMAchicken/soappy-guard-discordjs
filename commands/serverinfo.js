@@ -19,4 +19,5 @@ module.exports.help = {
 	description: 'Shows Server Info',
 	usage: 'serverinfo',
 	disableindm: true,
+	aliases: ['si', 'server'],
 };

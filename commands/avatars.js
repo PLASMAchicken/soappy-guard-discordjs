@@ -15,5 +15,6 @@ module.exports.help = {
 	description: 'gives back avatars!',
 	usage: '-',
 	botowner: true,
+	aliases: ['profile'],
 };
 
