@@ -3,7 +3,7 @@ const ms = require('ms');
 
 module.exports.run = (bot, message, args, guildConf) => {
 	if(!args.length) return helpembed.send(message);
-	const cmd = args.join(' ').toLowerCase()
+	const cmd = args.join(' ').toLowerCase();
 	const command = bot.commands.get(cmd) || bot.commands.find(commanda => commanda.help.aliases && commanda.help.aliases.includes(cmd));
 	if (!command) return message.reply('that\'s not a valid command!');
 	const helpcmd = [];
