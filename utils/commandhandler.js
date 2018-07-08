@@ -100,11 +100,8 @@ module.exports.start = (bot, timestamp) => { // load commands from command dir
 		}
 		const jsfile = files.filter(f => f.split('.').pop() === 'js'); // get all .js files
 		if (jsfile.length <= 0) { // if no commands present
-
-			console.log(timestamp() + 'Couldn\'t find commands.'); // log no commands
-			return; // => close commandhandler and start bot
+			return console.log(timestamp() + 'Couldn\'t find commands.'); // log no commands => close commandhandler and start bot
 		}
-
 		jsfile.forEach((f) => { // if commands present
 			const props = require(`../commands/${f}`); // => load each one
 
