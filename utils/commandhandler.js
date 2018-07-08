@@ -23,7 +23,7 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 	const [, matchedPrefix] = message.content.match(prefixRegex);
 	const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
 	const cmd = args.shift().toLowerCase();
-	const commandfile = bot.commands.get(cmd); // get command ( !ping ) and subtract prefix (= ping) and find command
+	const commandfile = bot.commands.get(cmd) || bot.commands.find(command => command.help.aliases && command.help.aliases.includes(cmd));
 	if (commandfile) {
 		if (message.channel.type === 'text') {
 			const botchannel = message.guild.channels.find('name', guildConf.botChannel);
