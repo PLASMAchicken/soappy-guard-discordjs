@@ -3,8 +3,14 @@ const { RichEmbed } = require('discord.js');
 module.exports.add = async (reaction, user, bot) => {
 	const message = reaction.message;
 	if (reaction.emoji.name !== '⭐') return;
-	if (message.author.id === user.id) return message.channel.send(`${user}, you cannot star your own messages.`);
-	if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
+	if (message.author.id === user.id) {
+		reaction.remove(user);
+		return message.channel.send(`${user}, you cannot star your own messages.`).then(msg => msg.delete(5000));
+	}
+	if (message.author.bot) {
+		reaction.remove(user);
+		return message.channel.send(`${user}, you cannot star bot messages.`).then(msg => msg.delete(5000));
+	}
 	const { starboardChannel } = bot.guildsettings.get(message.guild.id);
 	const starChannel = message.guild.channels.find('name', starboardChannel); if(!starChannel) return;
 	let fetch = await starChannel.fetchMessages({ limit: 10 });
