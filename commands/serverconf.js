@@ -17,5 +17,5 @@ module.exports.help = {
 	description: 'Lists ServerConf',
 	usage: 'serverconfig',
 	disableindm: true,
-	aliases: ['sc'],
+	aliases: ['sc', 'serverconf', 'sconf'],
 };
