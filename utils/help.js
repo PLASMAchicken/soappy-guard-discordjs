@@ -5,13 +5,13 @@ commands.push('Here\'s a list of all my commands:');
 commands.push('\nYou can send `help [command name]` to get info on a specific command!\n');
 
 
-module.exports.add = (module, description, usage, hide) => {
-	if(hide == true) {return;}
-	commands.push(`Command: ${module}\n\tDescription: ${description}\n\tUsage: ${usage}\n`);
+module.exports.add = (props) => {
+	if(props.help.hideinhelp == true) {return;}
+	commands.push(`Command: ${props.help.name}\n\tDescription: ${props.help.description}\n\tUsage: ${props.help.usage}\n${props.help.aliases == undefined ? '' : '\tAliases: ' + props.help.aliases.join(', ') + '\n' }`);
 };
 
 module.exports.send = (message) => {
-	return message.author.send(commands, { split: true, code: 'markdown' })
+	return message.author.send(commands, { split: { char: '\n\n' }, code: 'markdown' })
 		.then(() => {
 			if (message.channel.type === 'dm') return;
 			message.reply('I\'ve sent you a DM with all my commands!');
