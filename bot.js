@@ -15,7 +15,7 @@ const commandhandler = require('./utils/commandhandler.js'); // load commands an
 const reactionshandler = require('./utils/reactionshandler.js'); // used for commands that use the reactions menu
 const branch = require('./utils/branch.js'); // used to get the current branch
 const notify = require('./utils/notifybot.js'); // Error Handler
-
+const starboard = require('./starboard.js');
 
 // WEB PART
 const app = require('./app');
@@ -145,7 +145,11 @@ bot.on('messageUpdate', async (oldMessage, newMessage) => { // on edited message
 });
 
 bot.on('messageReactionAdd', (messageReaction, user) => { // on Reaction handle
+	starboard.add(messageReaction, user, bot);
 	reactionshandler.handle(messageReaction, user, timestamp, bot);
+});
+bot.on('messageReactionRemove', (messageReaction, user) => { // on Reaction handle
+	starboard.remove(messageReaction, user, bot);
 });
 
 bot.on('guildCreate', guild => {
