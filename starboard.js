@@ -44,8 +44,8 @@ module.exports.add = async (reaction, user, bot) => {
 	}
 };
 module.exports.remove = async (reaction, user, bot) => {
-	if (message.author.id === user.id) return;
 	const message = reaction.message;
+	if (message.author.id === user.id) return;
 	if (reaction.emoji.name !== '⭐') return;
 	const { starboardChannel } = bot.guildsettings.get(message.guild.id);
 	const starChannel = message.guild.channels.find('name', starboardChannel); if(!starChannel) return;
