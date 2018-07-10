@@ -56,7 +56,7 @@ function exec(messageReaction, user, menu, bot) {
 			if(eventtoexec.nine) eventtoexec.nine(messageReaction, user);
 			break;
 		default:
-			return messageReaction, user.message.channel.send('FAILED');
+			return messageReaction.message.channel.send('FAILED');
 		}
 	}
 

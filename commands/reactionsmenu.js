@@ -1,7 +1,7 @@
 const reactionshandler = require('../utils/reactionshandler.js');
 const reactions = require('../utils/reactions.js');
 
-module.exports.run = async (message) => {
+module.exports.run = async (bot, message) => {
 	const msg = await message.channel.send('Test select 1');
 	await msg.react(reactions.one.emoji);
 	await msg.react(reactions.two.emoji);

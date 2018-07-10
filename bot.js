@@ -146,7 +146,7 @@ bot.on('messageUpdate', async (oldMessage, newMessage) => { // on edited message
 
 bot.on('messageReactionAdd', (messageReaction, user) => { // on Reaction handle
 	starboard.add(messageReaction, user, bot);
-	reactionshandler.handle(messageReaction, user, timestamp, bot);
+	reactionshandler.handle(messageReaction, user, bot);
 });
 bot.on('messageReactionRemove', (messageReaction, user) => { // on Reaction handle
 	starboard.remove(messageReaction, user, bot);
