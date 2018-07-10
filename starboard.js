@@ -2,6 +2,7 @@ const { RichEmbed } = require('discord.js');
 
 module.exports.add = async (reaction, user, bot) => {
 	const message = reaction.message;
+	if(message.channel.type != 'text') return;
 	if (reaction.emoji.name !== '⭐') return;
 	if (message.author.id === user.id) {
 		reaction.remove(user);
