@@ -12,7 +12,7 @@ module.exports.add = async (reaction, user, bot) => {
 		return message.channel.send(`${user}, you cannot star bot messages.`).then(msg => msg.delete(5000));
 	}
 	const { starboardChannel } = bot.guildsettings.get(message.guild.id);
-	const starChannel = message.guild.channels.find('name', starboardChannel); if(!starChannel) return;
+	const starChannel = message.guild.channels.find(channel => channel.name == starboardChannel); if(!starChannel) return;
 	let fetch = await starChannel.fetchMessages({ limit: 10 });
 	fetch = fetch.filter(m => m.embeds[0] != undefined && m.author.id == bot.user.id);
 	const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(message.id));
@@ -48,7 +48,7 @@ module.exports.remove = async (reaction, user, bot) => {
 	if (message.author.id === user.id) return;
 	if (reaction.emoji.name !== '⭐') return;
 	const { starboardChannel } = bot.guildsettings.get(message.guild.id);
-	const starChannel = message.guild.channels.find('name', starboardChannel); if(!starChannel) return;
+	const starChannel = message.guild.channels.find(channel => channel.name == starboardChannel); if(!starChannel) return;
 	let fetch = await starChannel.fetchMessages({ limit: 10 });
 	fetch = fetch.filter(m => m.embeds[0] != undefined);
 	const stars = fetch.find(m => m.embeds[0].footer.text.startsWith('⭐') && m.embeds[0].footer.text.endsWith(reaction.message.id));
