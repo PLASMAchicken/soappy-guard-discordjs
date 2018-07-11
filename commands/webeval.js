@@ -1,3 +1,4 @@
+/* eslint no-unused-vars: 0  */
 function clean(text) {
 	if (typeof (text) === 'string') {return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203));}
 	else {return text;}
@@ -61,11 +62,15 @@ evalRouter.get('/exec', function(req, res, next) {
 			let evaled = eval(code);
 
 			if (typeof evaled !== 'string') {evaled = require('util').inspect(evaled);}
-
-			res.end(clean(evaled), { code:'xl' }).catch(err => errors.err(message, err));
+			res.writeHead(200, { 'Content-Type': 'text/html' });
+			res.write('<link rel="stylesheet" href="/stylesheets/webevalf.css">');
+			res.write(evaled);
+			res.end().catch(err => errors.err(message, err));
 		}
 		catch (err) {
-			res.end(`ERROR\n${clean(err)}`);
+			res.writeHead(200, { 'Content-Type': 'text/html' });
+			res.write('<link rel="stylesheet" href="/stylesheets/webevalf.css">');
+			res.end(`ERROR\n${err.message}`);
 		}
 	}
 	else {
