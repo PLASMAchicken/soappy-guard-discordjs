@@ -17,95 +17,6 @@ const branch = require('./utils/branch.js'); // used to get the current branch
 const notify = require('./utils/notifybot.js'); // Error Handler
 const starboard = require('./starboard.js');
 
-// WEB PART
-const app = require('./app');
-const debug = require('debug')('soappy-guard-discordjs:server');
-const http = require('http');
-
-/**
- * Get port from environment and store in Express.
- */
-
-const port = normalizePort(process.env.PORT || '27015');
-app.set('port', port);
-
-/**
- * Create HTTP server.
- */
-
-const server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-server.listen(port, '0.0.0.0');
-server.on('error', onError);
-server.on('listening', onListening);
-
-/**
- * Normalize a port into a number, string, or false.
- */
-
-function normalizePort(val) {
-	const porter = parseInt(val, 10);
-
-	if (isNaN(porter)) {
-		// named pipe
-		return val;
-	}
-
-	if (porter >= 0) {
-		// port number
-		return porter;
-	}
-
-	return false;
-}
-
-/**
- * Event listener for HTTP server "error" event.
- */
-
-function onError(error) {
-	if (error.syscall !== 'listen') {
-		throw error;
-	}
-
-	const bind = typeof port === 'string' ?
-		'Pipe ' + port :
-		'Port ' + port;
-
-	// handle specific listen errors with friendly messages
-	switch (error.code) {
-	case 'EACCES':
-		console.error(bind + ' requires elevated privileges');
-		process.exit(1);
-		break;
-	case 'EADDRINUSE':
-		console.error(bind + ' is already in use');
-		process.exit(1);
-		break;
-	default:
-		throw error;
-	}
-}
-
-/**
- * Event listener for HTTP server "listening" event.
- */
-
-function onListening() {
-	console.log(`${timestamp()} Example app listening at http://${server.address().address}:${server.address().port}`);
-	const addr = server.address();
-	const bind = typeof addr === 'string' ?
-		'pipe ' + addr :
-		'port ' + addr.port;
-	debug('Listening on ' + bind);
-}
-
-
-// BOT PART
 // startup
 const bot = new Discord.Client({}); // Start Bot
 bot.commands = new Discord.Collection(); // Init Command Handler
@@ -125,10 +36,6 @@ bot.defaultguildsettings = require('./config/defaultguildsettings.js'); // load 
 
 // events
 bot.on('ready', async () => { // when Bot Succesfullly loged into Discord
-	if(!bot.shard || bot.shard.count != 1) {
-		console.error(timestamp() + ' Please start the bot using start.js!');
-		return process.exit();
-	}
 	console.log(`${timestamp()} ${bot.user.username} is online on ${bot.guilds.size} servers! \n${timestamp()} Bot started in ${bot.readyAt - launchtime}ms!`);
 	bot.user.setActivity(`${bot.guilds.size} servers${branch() ? `, on ${branch()} branch` : ''}!`, {
 		type: 'WATCHING',

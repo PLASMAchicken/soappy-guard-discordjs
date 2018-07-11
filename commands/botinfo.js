@@ -28,7 +28,7 @@ async function botinfo(bot, message) {
 		.setAuthor(bot.user.username, bot.user.displayAvatarURL)
 		.addField('Bot Created on', new Date(bot.user.createdAt).toUTCString(), inline)
 		.addField('⏱ uptime', `${uptime(bot)}`, inline)
-		.addField('Shard', `${bot.shard.id + 1} | ${bot.shard.count}`, inline)
+		// .addField('Shard', `${bot.shard.id + 1} | ${bot.shard.count}`, inline)
 		.addField('Invite Bot', `[Invite Bot](https://discordapp.com/api/oauth2/authorize?client_id=${bot.user.id}&permissions=8&scope=bot)`)
 		.setFooter('And do not forget to wash ya hands!');
 	if(branch()) {
