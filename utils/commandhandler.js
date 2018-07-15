@@ -3,7 +3,7 @@ const fs = require('fs');
 const ms = require('ms');
 
 // Utils
-const hasbotperms = require('../utils/hasbotperms.js');
+const hasbotperms = require('../utils/hasperms.js');
 const help = require('../utils/help.js');
 
 // Configs
@@ -36,26 +36,22 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 					});
 				}
 			}
+			console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} request by ${message.author.username} @ ${message.guild.name} `); // if command can run => log action
 		}
-		if (message.channel.type === 'dm') {
+		else {
 			if(commandfile.help.disableindm == true)return message.channel.send('Sorry this Command is not yet supported!'); // check if command is supported in dm if not => return
-			console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${cmd} request by ${message.author.username} @ ${message.author.id} `); // if command can run => log action
-		}
-		else{
-			console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${cmd} request by ${message.author.username} @ ${message.guild.name} `); // if command can run => log action
+			console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} request by ${message.author.username} @ ${message.author.id} `); // if command can run => log action
 		}
 		if(commandfile.help.botowner == true || commandfile.help.botadmin == true) { // if command requires bot owner => check
 			if(commandfile.help.botowner == true) {
 				if(hasbotperms.owner(message.author, message) != true) { // if not botowner => return
-					console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${cmd} failed!: Not Bot Owner! `);
+					console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Bot Owner! `);
 					return;
 				}
 			}
-			else if(commandfile.help.botadmin == true) {
-				if(hasbotperms.admin(message.author, message) != true) { // if not botadmin => return
-					console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${cmd} failed!: Not Bot Admin! `);
-					return;
-				}
+			else if(hasbotperms.admin(message.author, message) != true) { // if not botadmin => return
+				console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Bot Admin! `);
+				return;
 			}
 		}
 		const now = Date.now();

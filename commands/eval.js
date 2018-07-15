@@ -1,5 +1,4 @@
 /* eslint no-unused-vars: 0  */
-const hasbotperms = require('../utils/hasbotperms.js');
 const Discord = require('discord.js');
 const request = require('snekfetch');
 const botconfig = require('../config/botconfig.json');
@@ -7,9 +6,6 @@ const botconfig = require('../config/botconfig.json');
 const cblockre = /(^```js)|(```$)/g;
 
 module.exports.run = async (bot, message, args) => {
-
-	if(hasbotperms.owner(message.author, message) === true) {
-
 		try {
 			if(args[0] == 'secured') {
 				args.shift();
@@ -35,7 +31,6 @@ module.exports.run = async (bot, message, args) => {
 		catch (err) {
 			message.channel.send(`\`ERROR\` \`\`\`xl\n${err}\n\`\`\``);
 		}
-	}
 };
 
 

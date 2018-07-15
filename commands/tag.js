@@ -1,4 +1,4 @@
-const hasbotperms = require('../utils/hasbotperms.js');
+const hasbotperms = require('../utils/hasperms.js');
 const Discord = require('discord.js');
 
 module.exports.run = (bot, message, args) => {

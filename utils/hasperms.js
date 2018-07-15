@@ -9,11 +9,11 @@ module.exports.owner = (user, message) => {
 };
 
 module.exports.admin = (user, message) => {
-	for (var i = 0; i < botconfig.botadmins.length; i++) {
-		if (botconfig.botadmins[i] === user.id) return true;
+	for (const admin of botconfig.botadmins) {
+		if (admin === user.id) return true;
 	}
-	for (var i = 0; i < botconfig.botowners.length; i++) {
-		if (botconfig.botowners[i] === user.id) return true;
+	for (const owner of botconfig.botowners) {
+		if (owner === user.id) return true;
 	}
 	if (message) message.channel.send('Boi this is only for ma Owna or Admins!');
 	return false;
