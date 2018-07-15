@@ -26,11 +26,11 @@ bot.login(process.env.TOKEN); // login to Discord
 
 // Database
 const Enmap = require('enmap');
-const EnmapLevel = require('enmap-level');
-bot.cooldowns = new Enmap({ provider: new EnmapLevel({ name: 'cooldowns' }) });
-bot.guildsettings = new Enmap({ provider: new EnmapLevel({ name: 'guildsettings' }) });
-bot.userdata = new Enmap({ provider: new EnmapLevel({ name: 'userdata' }) });
-bot.tags = new Enmap({ provider: new EnmapLevel({ name: 'tags' }) });
+const provider = require('enmap-sqlite');
+bot.cooldowns = new Enmap({ provider: new provider({ name: 'cooldowns' }) });
+bot.guildsettings = new Enmap({ provider: new provider({ name: 'guildsettings' }) });
+bot.userdata = new Enmap({ provider: new provider({ name: 'userdata' }) });
+bot.tags = new Enmap({ provider: new provider({ name: 'tags' }) });
 bot.defaultguildsettings = require('./config/defaultguildsettings.js'); // load bot config
 
 
