@@ -12,21 +12,14 @@
     "npm": "*"
   },
   "dependencies": {
+    "@types/node": "^10.5.2",
     "cheerio": "^1.0.0-rc.2",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
     "discord.js": "^11.3.2",
     "dotenv": "^5.0.1",
     "enmap": "^2.6.3",
     "enmap-level": "^2.1.0",
-    "eslint": "^5.0.1",
-    "express": "~4.16.0",
-    "express-validator": "^5.2.0",
-    "http-errors": "~1.6.2",
-    "jade": "~1.11.0",
-    "morgan": "~1.9.0",
+    "eslint": "^5.1.0",
     "ms": "^2.1.1",
-    "npm": "^6.1.0",
     "processmaker": "^0.1.1",
     "request": "^2.86.0",
     "snekfetch": "^4.0.4"
