@@ -11,7 +11,9 @@ module.exports.run = async (bot, message) => {
 	bot.destroy()
 		.then(() => bot.login(process.env.token));
 	restartembed.setDescription(`${bot.user.username} has restarted!`);
-	message.channel.send(restartembed);
+	bot.once('ready', () => {
+		message.channel.send(restartembed);
+	});
 };
 
 module.exports.help = {
