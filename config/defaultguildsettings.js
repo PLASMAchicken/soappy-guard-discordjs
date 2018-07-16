@@ -1,11 +1,11 @@
 module.exports = defaultSettings = {
-  "prefix": "!",
-  "modLogChannel": "disabled",
-  "staffRole": "Staff",
-  "adminRole": "Administrator",
-  "welcomeChannel": "welcome",
-  "welcomeMessage": "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
-  "bullytime": "5min",
-  "botChannel": "disabled",
-  "starboardChannel": "starboard"
-}
+	'prefix': '!',
+	'modLogChannel': 'disabled',
+	'staffRole': 'Staff',
+	'adminRole': 'Admin',
+	'welcomeChannel': 'disabled',
+	'welcomeMessage': 'disabled',
+	'bullytime': 'disabled',
+	'botChannel': 'disabled',
+	'starboardChannel': 'disabled',
+};
