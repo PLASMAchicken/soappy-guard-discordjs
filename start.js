@@ -64,8 +64,9 @@ bot.on('guildCreate', guild => {
 });
 
 bot.on('guildMemberAdd', member => {
-	let welcomeMessage = bot.guildsettings.getProp(member.guild.id, 'welcomeMessage');
-	const welcomeChannel = member.guild.channels.find('name', bot.guildsettings.getProp(member.guild.id, 'welcomeChannel'));
+	const guildConf = bot.guildsettings.get(member.guild.id) || bot.defaultguildsettings;
+	let welcomeMessage = guildConf.welcomeMessage;
+	const welcomeChannel = member.guild.channels.find(c => c.name == guildConf.welcomeChannel && c.type == 'text');
 	if(!welcomeChannel || !welcomeMessage) return;
 	welcomeMessage = welcomeMessage.replace('{{user}}', member.user.tag);
 	welcomeChannel.send(welcomeMessage);
