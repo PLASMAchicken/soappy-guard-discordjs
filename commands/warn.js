@@ -1,9 +1,7 @@
-const errors = require('../utils/errors.js');
 const Discord = require('discord.js');
 const SnowflakeUtil = Discord.SnowflakeUtil;
 
-module.exports.run = async (bot, message, args, guildConf) => {
-	if(!message.member.roles.exists('name', guildConf['staffRole']) && !message.member.roles.exists('name', guildConf['adminRole'])) return errors.noPerms(message, guildConf['staffRole'] + 'Role');
+module.exports.run = async (bot, message, args) => {
 	const towarn = message.mentions.members.first() || message.guild.members.get(args[0]);
 	if(!towarn) return message.reply('User not found!');
 	const userdata = bot.userdata.get(towarn.id) || {};
