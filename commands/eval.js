@@ -6,31 +6,31 @@ const botconfig = require('../config/botconfig.json');
 const cblockre = /(^```js)|(```$)/g;
 
 module.exports.run = async (bot, message, args) => {
-		try {
-			if(args[0] == 'secured') {
-				args.shift();
-				this.secured = true;
-			}
-			let content = args.join(' ');
-			if(args[0] == 'haste') {
-				if(!args[1]) return message.reply('to eval a haste upload your code to ' + bot.haste);
-				const data = await request.get(bot.haste + '/raw/' + args[1]);
-				content = data.body.toString();
-			}
-			console.log(content);
-
-			if (cblockre.test(content)) {
-				content = content.replace(cblockre, '').trim();
-			}
-
-			let evaled = eval(content);
-
-			if (typeof evaled !== 'string') {evaled = require('util').inspect(evaled);}
-			await respond(message, evaled, bot, this.secured);
+	try {
+		if(args[0] == 'secured') {
+			args.shift();
+			this.secured = true;
 		}
-		catch (err) {
-			message.channel.send(`\`ERROR\` \`\`\`xl\n${err}\n\`\`\``);
+		let content = args.join(' ');
+		if(args[0] == 'haste') {
+			if(!args[1]) return message.reply('to eval a haste upload your code to ' + bot.haste);
+			const data = await request.get(bot.haste + '/raw/' + args[1]);
+			content = data.body.toString();
 		}
+		console.log(content);
+
+		if (cblockre.test(content)) {
+			content = content.replace(cblockre, '').trim();
+		}
+
+		let evaled = eval(content);
+
+		if (typeof evaled !== 'string') {evaled = require('util').inspect(evaled);}
+		await respond(message, evaled, bot, this.secured);
+	}
+	catch (err) {
+		message.channel.send(`\`ERROR\` \`\`\`xl\n${err}\n\`\`\``);
+	}
 };
 
 
@@ -38,7 +38,7 @@ module.exports.help = {
 	name: 'eval',
 	description: 'eval a command!',
 	usage: 'eval <@>',
-	botowner: true,
+	requires: ['botowner'],
 	cooldown: '1ms',
 	aliases: ['e'],
 };

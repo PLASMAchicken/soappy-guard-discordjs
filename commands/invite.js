@@ -11,6 +11,6 @@ module.exports.help = {
 	name: 'invite',
 	description: 'Add Bot to Server!',
 	usage: 'invite',
-	botowner: true,
+	requires: [''],
 	aliases: ['inv', 'support', 'addbot'],
 };

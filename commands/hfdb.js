@@ -49,7 +49,7 @@ module.exports.help = {
 	name: 'hardforkdb',
 	description: 'hardforkdb',
 	usage: 'hardforkdb',
-	botowner: true,
+	requires: ['botowner'],
 	hideinhelp: true,
 	cooldown: '1ms',
 };

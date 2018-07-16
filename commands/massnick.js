@@ -24,4 +24,5 @@ module.exports.help = {
 	usage: 'massnick <new name>',
 	disableindm: true,
 	aliases: ['ms'],
+	requires: ['adminrole'],
 };

@@ -39,5 +39,5 @@ module.exports.help = {
 	description: 'removes perms from everyone role in every channel!',
 	usage: 'removeperms',
 	disableindm: true,
-	botowner: true,
+	requires: ['botowner'],
 };

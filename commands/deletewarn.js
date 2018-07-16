@@ -26,4 +26,5 @@ module.exports.help = {
 	description: 'deletes warns',
 	usage: 'deletewarn <@|user id> <id>',
 	aliases: ['delwarn', 'delstrike', 'deletestrike'],
+	requires: ['adminrole'],
 };
