@@ -12,7 +12,8 @@ module.exports.add = async (reaction, user, bot) => {
 		reaction.remove(user);
 		return message.channel.send(`${user}, you cannot star bot messages.`).then(msg => msg.delete(5000));
 	}
-	const { starboardChannel } = bot.guildsettings.get(message.guild.id);
+	const guildsettings = bot.guildsettings.get(message.guild.id) || bot.defaultguildsettings;
+	const { starboardChannel } = guildsettings;
 	const starChannel = message.guild.channels.find(channel => channel.name == starboardChannel); if(!starChannel) return;
 	let fetch = await starChannel.fetchMessages({ limit: 10 });
 	fetch = fetch.filter(m => m.embeds[0] != undefined && m.author.id == bot.user.id);

@@ -29,4 +29,5 @@ module.exports.help = {
 	description: 'Bans Bad People',
 	usage: 'ban <@USER> <Reason>',
 	disableindm: true,
+	requires: ['botowner'],
 };

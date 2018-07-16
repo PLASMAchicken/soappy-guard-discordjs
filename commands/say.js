@@ -12,4 +12,5 @@ module.exports.help = {
 	description: 'let the bot say something funny',
 	usage: 'say <TXT>',
 	disableindm: true,
+	requires: ['staffrole'],
 };

@@ -19,5 +19,5 @@ module.exports.help = {
 	name: 'addbotowner',
 	description: 'Add Bot owner!',
 	usage: 'addbotowner <@>',
-	botowner: true,
+	requires: ['botowner'],
 };

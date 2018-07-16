@@ -18,4 +18,5 @@ module.exports.help = {
 	usage: 'serverconfig',
 	disableindm: true,
 	aliases: ['sc', 'serverconf', 'sconf'],
+	requires: ['staffrole']
 };

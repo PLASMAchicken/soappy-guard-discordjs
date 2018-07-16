@@ -14,7 +14,6 @@ module.exports.help = {
 	name: 'avatars',
 	description: 'gives back avatars!',
 	usage: '-',
-	botowner: true,
 	aliases: ['profile'],
 	cooldown: '4min',
 };

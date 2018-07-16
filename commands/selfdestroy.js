@@ -36,7 +36,7 @@ module.exports.help = {
 	name:'selfdestroy',
 	description: 'selfdestroy',
 	hideinhelp: false,
-	usage: 'selfdestroy <time> <msg>',
+	usage: 'selfdestroy time=3 | text=<msg>',
 	disableindm: true,
 	aliases: ['sd'],
 };

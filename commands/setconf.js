@@ -23,4 +23,5 @@ module.exports.help = {
 	usage: 'setconf <key> <new value>',
 	disableindm: true,
 	aliases: ['setconf', 'setserconf', 'setserverconf', 'setserverconfig'],
+	requires: ['adminrole'],
 };

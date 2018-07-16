@@ -32,4 +32,5 @@ module.exports.help = {
 	description: 'warn somebody bad!',
 	usage: 'warn <@|id> <Why ;(>',
 	aliases: ['strike'],
+	requires: ['staffrole'],
 };

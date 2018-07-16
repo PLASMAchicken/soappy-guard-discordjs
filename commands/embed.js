@@ -75,4 +75,5 @@ module.exports.help = {
 	description: '**__USE !embed help__**',
 	usage: 'embed help',
 	disableindm: true,
+	requires: ['staffrole'],
 };

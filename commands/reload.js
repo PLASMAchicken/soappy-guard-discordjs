@@ -19,5 +19,5 @@ module.exports.help = {
 	name: 'reload',
 	description: 'reload a command',
 	usage: 'reload <cmd>',
-	botadmin: true,
+	requires: ['botadmin'],
 };

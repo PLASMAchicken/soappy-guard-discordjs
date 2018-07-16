@@ -28,5 +28,5 @@ module.exports.help = {
 	description: 'Kicks bad People',
 	usage: 'kick <@User> <Reason>',
 	disableindm: true,
-
+	requires: ['staffrole'],
 };

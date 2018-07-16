@@ -5,6 +5,7 @@ const ms = require('ms');
 // Utils
 const hasbotperms = require('../utils/hasperms.js');
 const help = require('../utils/help.js');
+const errors = require('../utils/errors.js');
 
 // Configs
 const botconfig = require('../config/botconfig.json');
@@ -42,16 +43,26 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 			if(commandfile.help.disableindm == true)return message.channel.send('Sorry this Command is not yet supported!'); // check if command is supported in dm if not => return
 			console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} request by ${message.author.username} @ ${message.author.id} `); // if command can run => log action
 		}
-		if(commandfile.help.botowner == true || commandfile.help.botadmin == true) { // if command requires bot owner => check
-			if(commandfile.help.botowner == true) {
+		if(commandfile.help.requires) {
+			if(commandfile.help.requires.includes('botowner')) {
 				if(hasbotperms.owner(message.author, message) != true) { // if not botowner => return
-					console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Bot Owner! `);
-					return;
+					return console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Bot Owner! `);
 				}
 			}
-			else if(hasbotperms.admin(message.author, message) != true) { // if not botadmin => return
-				console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Bot Admin! `);
-				return;
+			else if (commandfile.help.requires.includes('botadmin')) {
+				if(hasbotperms.admin(message.author, message) != true) { // if not botadmin => return
+					return console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Bot Admin! `);
+				}
+			}
+			else if (message.channel.type === 'text') {
+				if (commandfile.help.requires.includes('adminrole')) {
+					const adminRole = message.guild.roles.find('name', guildConf.adminRole);
+					if (!adminRole || !message.member.roles.has(adminRole.id)) return errors.noPerms(message, guildConf.adminRole + ' role'), console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Server Admin! `);
+				}
+				else if (commandfile.help.requires.includes('staffrole')) {
+					const staffRole = message.guild.roles.find('name', guildConf.staffRole);
+					if (!staffRole || !message.member.roles.has(staffRole.id)) return errors.noPerms(message, guildConf.staffRole + ' role'), console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Server Staff! `);
+				}
 			}
 		}
 		const now = Date.now();
