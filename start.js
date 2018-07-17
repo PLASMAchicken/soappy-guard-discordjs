@@ -60,6 +60,9 @@ bot.on('messageReactionRemove', (messageReaction, user) => { // on Reaction hand
 });
 
 bot.on('guildCreate', guild => {
+	bot.user.setActivity(`${bot.guilds.size} servers${branch() ? `, on ${branch()} branch` : ''}!`, {
+		type: 'WATCHING',
+	});
 	bot.guildsettings.set(guild.id, bot.defaultguildsettings);
 	const guildlog = new Discord.RichEmbed()
 		.setTitle('New Guild Joined!')
@@ -74,6 +77,9 @@ bot.on('guildCreate', guild => {
 });
 
 bot.on('guildDelete', guild => {
+	bot.user.setActivity(`${bot.guilds.size} servers${branch() ? `, on ${branch()} branch` : ''}!`, {
+		type: 'WATCHING',
+	});
 	const guildlog = new Discord.RichEmbed()
 		.setTitle('Left Guild!')
 		.setColor('RANDOM')
