@@ -61,6 +61,29 @@ bot.on('messageReactionRemove', (messageReaction, user) => { // on Reaction hand
 
 bot.on('guildCreate', guild => {
 	bot.guildsettings.set(guild.id, bot.defaultguildsettings);
+	const guildlog = new Discord.RichEmbed()
+		.setTitle('New Guild Joined!')
+		.setColor('RANDOM')
+		.addField('Server:', `${guild.name} with ID: ${guild.id} `)
+		.addField('Owner:', `${guild.owner.user.tag} with ID ${guild.ownerID} `)
+		.setTimestamp(new Date());
+	const botownerguild = bot.guilds.get(process.env.botownerguild);
+	const guildlogchannel = botownerguild.channels.find('name', 'bot-guilds');
+	if(!guildlogchannel) throw Error(`Could't find guildlogchannel! In ${process.env.botownerguild}`);
+	guildlogchannel.send(guildlog);
+});
+
+bot.on('guildDelete', guild => {
+	const guildlog = new Discord.RichEmbed()
+		.setTitle('Left Guild!')
+		.setColor('RANDOM')
+		.addField('Server:', `${guild.name} with ID: ${guild.id} `)
+		.addField('Owner:', `${guild.owner.user.tag} with ID: ${guild.ownerID} `)
+		.setTimestamp(new Date());
+	const botownerguild = bot.guilds.get(process.env.botownerguild);
+	const guildlogchannel = botownerguild.channels.find('name', 'bot-guilds');
+	if(!guildlogchannel) throw Error(`Could't find guildlogchannel! In ${process.env.botownerguild}`);
+	guildlogchannel.send(guildlog);
 });
 
 bot.on('guildMemberAdd', member => {
