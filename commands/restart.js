@@ -9,7 +9,7 @@ module.exports.run = async (bot, message) => {
 		.setDescription(`Please wait ${bot.user.username} is restarting`);
 	message.channel.send(restartembed);
 	bot.destroy()
-		.then(() => bot.login(process.env.token));
+		.then(() => bot.login(process.env.TOKEN));
 	restartembed.setDescription(`${bot.user.username} has restarted!`);
 	bot.once('ready', () => {
 		message.channel.send(restartembed);
