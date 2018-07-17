@@ -1,6 +1,7 @@
 // Packages
 const fs = require('fs');
 const ms = require('ms');
+const Discord = require('discord.js');
 
 // Utils
 const hasbotperms = require('../utils/hasperms.js');
@@ -12,9 +13,26 @@ const botconfig = require('../config/botconfig.json');
 
 module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 	if (message.author.bot) return; // message author =  bot => return
+	if(!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return;
+	if(!message.channel.permissionsFor(message.guild.me).has('EMBED_LINKS')) return message.channel.send('I need EMBED_LINKS Permission to work properly!');
 	let guildConf;
 	if (message.channel.type === 'text') {
 		guildConf = bot.guildsettings.get(message.guild.id) || bot.defaultguildsettings;
+		if(!guildConf['setup'] || guildConf.setup == 'false') {
+			guildConf['setup'] = true;
+			bot.guildsettings.set(message.guild.id, guildConf);
+			console.log('Sent SETUP EMBED to ' + message.guild.name)
+			const setupembed = new Discord.RichEmbed()
+				.setTitle('Bot Setup')
+				.setDescription('Hello, thanks for adding my Bot')
+				.addField('To get a List of all Commands do', '!help')
+				.addField('If you want to view your Servers Config you can do', '!serverconf')
+				.addField('To edit something in your Server Config do', '!setconf <key> <value>')
+				.addField('For Support you can do', '!support')
+				.setColor('RANDOM')
+				.addField('For Feedback you can do', '!request <message>');
+			message.channel.send(setupembed);
+		}
 	}
 	else{
 		guildConf = bot.defaultguildsettings;
@@ -57,11 +75,11 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 			else if (message.channel.type === 'text') {
 				if (commandfile.help.requires.includes('adminrole')) {
 					const adminRole = message.guild.roles.find('name', guildConf.adminRole);
-					if (!adminRole || !message.member.roles.has(adminRole.id)) return errors.noPerms(message, guildConf.adminRole + ' role'), console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Server Admin! `);
+					if (!message.member.hasPermission('ADMINISTRATOR') && (!adminRole || !message.member.roles.has(adminRole.id))) return errors.noPerms(message, guildConf.adminRole + ' role'), console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Server Admin! `);
 				}
 				else if (commandfile.help.requires.includes('staffrole')) {
 					const staffRole = message.guild.roles.find('name', guildConf.staffRole);
-					if (!staffRole || !message.member.roles.has(staffRole.id)) return errors.noPerms(message, guildConf.staffRole + ' role'), console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Server Staff! `);
+					if (!message.member.hasPermission('ADMINISTRATOR') && (!staffRole || !message.member.roles.has(staffRole.id))) return errors.noPerms(message, guildConf.staffRole + ' role'), console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Server Staff! `);
 				}
 			}
 		}
