@@ -4,7 +4,7 @@ const errors = require('../utils/errors.js');
 module.exports.run = (bot, message, args, guildConf) => {
 	try {
 		const time = guildConf.bullytime;
-		if(!time || time == false || time == 'disabled') return;
+		if(!time || time == false || time == 'disabled') return message.channel.send('The Bully Comannd is currently disabled! do !serverconf, then !setconf bullytime 5min');
 		const tobully = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
 		if(!tobully) return errors.cantfindUser(message, args[0]);
 		args.shift();

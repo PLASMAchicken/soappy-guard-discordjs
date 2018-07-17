@@ -23,6 +23,9 @@ bot.commands = new Discord.Collection(); // Init Command Handler
 commandhandler.start(bot, timestamp); // Start Loading Commands
 bot.login(process.env.TOKEN); // login to Discord
 
+// Discord Bot List Support
+const DBL = require('dblapi.js');
+bot.dbl = new DBL(process.env.dbl, bot);
 
 // Database
 const Enmap = require('enmap');
@@ -41,6 +44,12 @@ bot.on('ready', async () => { // when Bot Succesfullly loged into Discord
 		type: 'WATCHING',
 	});
 	if (bot.guilds.size == 0 || botconfig.on_start_print_invite == true) console.log(`${timestamp()} [Invite Bot]( https://discordapp.com/api/oauth2/authorize?client_id=${bot.user.id}&permissions=8&scope=bot )`);
+	dblpost();
+	function dblpost() {
+		bot.dbl.postStats(bot.guilds.size).then(dbl => console.log(timestamp() + ' Updated Discord Bot List Stats! ' + require('util').inspect(dbl)));
+	}
+	setInterval(dblpost, 600000);
+
 });
 
 bot.on('message', async message => { // on message run command
@@ -69,6 +78,8 @@ bot.on('guildCreate', guild => {
 		.setColor('RANDOM')
 		.addField('Server:', `${guild.name} with ID: ${guild.id} `)
 		.addField('Owner:', `${guild.owner.user.tag} with ID ${guild.ownerID} `)
+		.addField('Users:', guild.members.filter(m=> m.user.bot == false).size, true)
+		.addField('Bots:', guild.members.filter(m=> m.user.bot == true).size, true)
 		.setTimestamp(new Date());
 	const botownerguild = bot.guilds.get(process.env.botownerguild);
 	const guildlogchannel = botownerguild.channels.find('name', 'bot-guilds');
