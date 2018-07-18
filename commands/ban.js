@@ -17,11 +17,7 @@ module.exports.run = (bot, message, args) => {
 		.addField('Time', message.createdAt)
 		.addField('Reason', bReason);
 
-	const incidentchannel = message.guild.channels.find('name', 'incidents');
-	if(!incidentchannel) return message.channel.send('Can\'t find incidents channel.');
-
 	message.guild.member(bUser).ban(bReason);
-	incidentchannel.send(banEmbed);
 };
 
 module.exports.help = {

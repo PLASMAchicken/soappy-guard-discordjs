@@ -16,7 +16,8 @@ module.exports.run = (bot, message, args) => {
 			.setColor('RANDOM');
 		message.channel.send(infoembed);
 
-		const userdata = bot.userdata.get(message.author.id);
+		let userdata = bot.userdata.get(message.author.id);
+		if(!userdata) userdata = {};
 		if(!userdata.tags) userdata.tags = [];
 		userdata.tags.push(tagname);
 		bot.userdata.set(message.author.id, userdata);

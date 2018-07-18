@@ -82,7 +82,7 @@ bot.on('guildCreate', guild => {
 		.addField('Bots:', guild.members.filter(m=> m.user.bot == true).size, true)
 		.setTimestamp(new Date());
 	const botownerguild = bot.guilds.get(process.env.botownerguild);
-	const guildlogchannel = botownerguild.channels.find('name', 'bot-guilds');
+	const guildlogchannel = botownerguild.channels.find(c => c.name == 'bot-guilds');
 	if(!guildlogchannel) throw Error(`Could't find guildlogchannel! In ${process.env.botownerguild}`);
 	guildlogchannel.send(guildlog);
 });

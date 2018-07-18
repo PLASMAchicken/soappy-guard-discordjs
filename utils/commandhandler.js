@@ -21,7 +21,7 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 		if(!guildConf['setup'] || guildConf.setup == 'false') {
 			guildConf['setup'] = true;
 			bot.guildsettings.set(message.guild.id, guildConf);
-			console.log('Sent SETUP EMBED to ' + message.guild.name)
+			console.log('Sent SETUP EMBED to ' + message.guild.name);
 			const setupembed = new Discord.RichEmbed()
 				.setTitle('Bot Setup')
 				.setDescription('Hello, thanks for adding my Bot')
@@ -45,7 +45,7 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 	const commandfile = bot.commands.get(cmd) || bot.commands.find(command => command.help.aliases && command.help.aliases.includes(cmd));
 	if (commandfile) {
 		if (message.channel.type === 'text') {
-			const botchannel = message.guild.channels.find('name', guildConf.botChannel);
+			const botchannel = message.guild.channels.find(c => c.name == guildConf.botChannel);
 			if(botchannel) {
 				if(message.channel.name !== guildConf.botChannel) {
 					message.delete(0).catch(err => console.log(err));
@@ -74,11 +74,11 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 			}
 			else if (message.channel.type === 'text') {
 				if (commandfile.help.requires.includes('adminrole')) {
-					const adminRole = message.guild.roles.find('name', guildConf.adminRole);
+					const adminRole = message.guild.roles.find(r => r.name == guildConf.adminRole);
 					if (!message.member.hasPermission('ADMINISTRATOR') && (!adminRole || !message.member.roles.has(adminRole.id))) return errors.noPerms(message, guildConf.adminRole + ' role'), console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Server Admin! `);
 				}
 				else if (commandfile.help.requires.includes('staffrole')) {
-					const staffRole = message.guild.roles.find('name', guildConf.staffRole);
+					const staffRole = message.guild.roles.find(r => r.name == guildConf.staffRole);
 					if (!message.member.hasPermission('ADMINISTRATOR') && (!staffRole || !message.member.roles.has(staffRole.id))) return errors.noPerms(message, guildConf.staffRole + ' role'), console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Server Staff! `);
 				}
 			}

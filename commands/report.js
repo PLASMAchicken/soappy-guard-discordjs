@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
 		.setTimestamp(message.createdAt);
 	if(rreason == '') {return message.reply('SPECIFY REASON!');}
 	else{reportEmbed.addField('Reason', rreason);}
-	const reportschannel = message.guild.channels.find('name', 'reports');
+	const reportschannel = message.guild.channels.find(c => c.name == 'reports');
 	if(!reportschannel) return message.channel.send('Couldn\'t find reports channel.');
 
 
