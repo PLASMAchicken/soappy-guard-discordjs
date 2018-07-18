@@ -1,5 +1,4 @@
 const reactions = require('../utils/reactions.js');
-const tempmessage = require('../utils/tempmessage.js');
 
 const data = [];
 
@@ -8,11 +7,7 @@ module.exports.handle = async (messageReaction, user, bot) => {
 	const menu = data[messageReaction.message.id];
 	if (!menu) return; // No event for this message: stop
 	if (user.id != menu[1]) {
-		if(user.id != bot.user.id) {
-			messageReaction.remove(user);
-			return tempmessage(messageReaction.message, 'Please do not select things in other peoples menu! <@' + user.id + '>');
-		}
-		else {return;}
+		return;
 	}
 	exec(messageReaction, user, menu, bot); // Found event for Message => get emoji to text => exec it
 };
