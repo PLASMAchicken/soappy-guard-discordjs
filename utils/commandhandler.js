@@ -18,7 +18,7 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 	let guildConf;
 	if (message.channel.type === 'text') {
 		guildConf = bot.guildsettings.get(message.guild.id) || bot.defaultguildsettings;
-		if(!guildConf['setup'] || guildConf.setup == 'false') {
+		if(!guildConf['setup'] || guildConf.setup != true) {
 			guildConf['setup'] = true;
 			bot.guildsettings.set(message.guild.id, guildConf);
 			console.log('Sent SETUP EMBED to ' + message.guild.name);
@@ -78,8 +78,9 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 					if (!message.member.hasPermission('ADMINISTRATOR') && (!adminRole || !message.member.roles.has(adminRole.id))) return errors.noPerms(message, guildConf.adminRole + ' role'), console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Server Admin! `);
 				}
 				else if (commandfile.help.requires.includes('staffrole')) {
+					const adminRole = message.guild.roles.find(r => r.name == guildConf.adminRole);
 					const staffRole = message.guild.roles.find(r => r.name == guildConf.staffRole);
-					if (!message.member.hasPermission('ADMINISTRATOR') && (!staffRole || !message.member.roles.has(staffRole.id))) return errors.noPerms(message, guildConf.staffRole + ' role'), console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Server Staff! `);
+					if (!message.member.hasPermission('ADMINISTRATOR') && (!staffRole || !message.member.roles.has(staffRole.id) && (!adminRole || !message.member.roles.has(adminRole.id)))) return errors.noPerms(message, guildConf.staffRole + ' role'), console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Server Staff! `);
 				}
 			}
 		}

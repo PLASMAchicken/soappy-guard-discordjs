@@ -25,16 +25,11 @@ bot.login(process.env.TOKEN); // login to Discord
 
 // Discord Bot List Support
 const DBL = require('dblapi.js');
-bot.dbl = new DBL(process.env.dbl, bot);
+bot.dbl = new DBL(process.env.dbl, { webhookPort: 5000, webhookAuth: process.env.dbl });
 
 // Database
 const Enmap = require('enmap');
 const provider = require('enmap-sqlite');
-bot.cooldowns = new Enmap({ provider: new provider({ name: 'cooldowns' }) });
-bot.guildsettings = new Enmap({ provider: new provider({ name: 'guildsettings' }) });
-bot.userdata = new Enmap({ provider: new provider({ name: 'userdata' }) });
-bot.tags = new Enmap({ provider: new provider({ name: 'tags' }) });
-bot.defaultguildsettings = require('./config/defaultguildsettings.js'); // load bot config
 
 
 // events
@@ -49,7 +44,11 @@ bot.on('ready', async () => { // when Bot Succesfullly loged into Discord
 		bot.dbl.postStats(bot.guilds.size).then(dbl => console.log(timestamp() + ' Updated Discord Bot List Stats! ' + require('util').inspect(dbl)));
 	}
 	setInterval(dblpost, 600000);
-
+	bot.cooldowns = new Enmap({ provider: new provider({ name: 'cooldowns' }) });
+	bot.guildsettings = new Enmap({ provider: new provider({ name: 'guildsettings' }) });
+	bot.userdata = new Enmap({ provider: new provider({ name: 'userdata' }) });
+	bot.tags = new Enmap({ provider: new provider({ name: 'tags' }) });
+	bot.defaultguildsettings = require('./config/defaultguildsettings.js'); // load bot config
 });
 
 bot.on('message', async message => { // on message run command
@@ -116,4 +115,20 @@ process.on('unhandledRejection', (err) => { // OHH NO UNHANLED ERROR: NOTIFY ALL
 	console.error(err);
 	if (err.name == 'DiscordAPIError' && err.message == '401: Unauthorized') return process.exit();
 	notify(bot, 'botdevs', err);
+});
+
+bot.dbl.webhook.on('ready', hook => {
+	console.log(`${timestamp()} Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
+});
+bot.dbl.webhook.on('vote', vote => {
+	console.log(vote);
+	const votelog = new Discord.RichEmbed()
+		.setTitle('VOTE!')
+		.setColor('RANDOM')
+		.addField('Owner:', 'See Console! ')
+		.setTimestamp(new Date());
+	const botownerguild = bot.guilds.get(process.env.botownerguild);
+	const guildlogchannel = botownerguild.channels.find('name', 'bot-votes');
+	if(!guildlogchannel) throw Error(`Could't find botvotes! In ${process.env.botownerguild}`);
+	guildlogchannel.send(votelog);
 });
