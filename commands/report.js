@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, guildConf) => {
+	const reportschannel = message.guild.channels.find(c => c.name == guildConf.reportsChannel);
+	if(!reportschannel) return message.channel.send(`Couldn't find ${guildConf.reportsChannel} channel.`);
 	const rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
 	if(!rUser) return message.channel.send('Couldn\'t find user.');
 	const rreason = args.join(' ').slice(22);
@@ -14,10 +16,6 @@ module.exports.run = async (bot, message, args) => {
 		.setTimestamp(message.createdAt);
 	if(rreason == '') {return message.reply('SPECIFY REASON!');}
 	else{reportEmbed.addField('Reason', rreason);}
-	const reportschannel = message.guild.channels.find(c => c.name == 'reports');
-	if(!reportschannel) return message.channel.send('Couldn\'t find reports channel.');
-
-
 	message.delete().catch();
 
 
