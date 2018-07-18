@@ -7,5 +7,6 @@ module.exports = defaultSettings = {
   "welcomeMessage": "Welocme {{user}}!",
   "bullytime": "disabled",
   "botChannel": "disabled",
-  "starboardChannel": "dis abled"
+  "starboardChannel": "dis abled",
+  "reportsChannel": "reports"
 }

@@ -21,11 +21,20 @@ const starboard = require('./starboard.js');
 const bot = new Discord.Client({}); // Start Bot
 bot.commands = new Discord.Collection(); // Init Command Handler
 commandhandler.start(bot, timestamp); // Start Loading Commands
-bot.login(process.env.TOKEN); // login to Discord
-
+if(process.env.waitfordb == true) {
+	console.log(`${timestamp()} Waiting for DataBase to load up!`);
+	setTimeout(function() {
+		bot.login(process.env.TOKEN); // login to Discord
+		console.log(`${timestamp()} Database should be ready now!`);
+	}, 30000);
+}
+else{
+	bot.login(process.env.TOKEN); // login to Discord
+	console.log(`${timestamp()} Database wait skipped!`);
+}
 // Discord Bot List Support
 const DBL = require('dblapi.js');
-bot.dbl = new DBL(process.env.dbl, { webhookPort: 5000, webhookAuth: process.env.dbl });
+bot.dbl = new DBL(process.env.dbl);
 
 // Database
 const Enmap = require('enmap');
@@ -34,6 +43,11 @@ const provider = require('enmap-sqlite');
 
 // events
 bot.on('ready', async () => { // when Bot Succesfullly loged into Discord
+	bot.cooldowns = new Enmap({ provider: new provider({ name: 'cooldowns' }) });
+	bot.guildsettings = new Enmap({ provider: new provider({ name: 'guildsettings' }) });
+	bot.userdata = new Enmap({ provider: new provider({ name: 'userdata' }) });
+	bot.tags = new Enmap({ provider: new provider({ name: 'tags' }) });
+	bot.defaultguildsettings = require('./config/defaultguildsettings.js'); // load bot config
 	console.log(`${timestamp()} ${bot.user.username} is online on ${bot.guilds.size} servers! \n${timestamp()} Bot started in ${bot.readyAt - launchtime}ms!`);
 	bot.user.setActivity(`${bot.guilds.size} servers${branch() ? `, on ${branch()} branch` : ''}!`, {
 		type: 'WATCHING',
@@ -44,11 +58,6 @@ bot.on('ready', async () => { // when Bot Succesfullly loged into Discord
 		bot.dbl.postStats(bot.guilds.size).then(dbl => console.log(timestamp() + ' Updated Discord Bot List Stats! ' + require('util').inspect(dbl)));
 	}
 	setInterval(dblpost, 600000);
-	bot.cooldowns = new Enmap({ provider: new provider({ name: 'cooldowns' }) });
-	bot.guildsettings = new Enmap({ provider: new provider({ name: 'guildsettings' }) });
-	bot.userdata = new Enmap({ provider: new provider({ name: 'userdata' }) });
-	bot.tags = new Enmap({ provider: new provider({ name: 'tags' }) });
-	bot.defaultguildsettings = require('./config/defaultguildsettings.js'); // load bot config
 });
 
 bot.on('message', async message => { // on message run command
@@ -116,7 +125,7 @@ process.on('unhandledRejection', (err) => { // OHH NO UNHANLED ERROR: NOTIFY ALL
 	if (err.name == 'DiscordAPIError' && err.message == '401: Unauthorized') return process.exit();
 	notify(bot, 'botdevs', err);
 });
-
+/*
 bot.dbl.webhook.on('ready', hook => {
 	console.log(`${timestamp()} Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
 });
@@ -125,10 +134,11 @@ bot.dbl.webhook.on('vote', vote => {
 	const votelog = new Discord.RichEmbed()
 		.setTitle('VOTE!')
 		.setColor('RANDOM')
-		.addField('Owner:', 'See Console! ')
+		.addField('Voter:', `${bot.users.get(vote.user) ? bot.users.get(vote.user).tag : vote.user}`)
 		.setTimestamp(new Date());
 	const botownerguild = bot.guilds.get(process.env.botownerguild);
 	const guildlogchannel = botownerguild.channels.find('name', 'bot-votes');
 	if(!guildlogchannel) throw Error(`Could't find botvotes! In ${process.env.botownerguild}`);
 	guildlogchannel.send(votelog);
 });
+*/
