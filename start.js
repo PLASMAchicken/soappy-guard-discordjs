@@ -21,7 +21,7 @@ const starboard = require('./starboard.js');
 const bot = new Discord.Client({}); // Start Bot
 bot.commands = new Discord.Collection(); // Init Command Handler
 commandhandler.start(bot, timestamp); // Start Loading Commands
-if(process.env.waitfordb == true) {
+if(process.env.waitfordb == 'true' || process.env.waitfordb == true) {
 	console.log(`${timestamp()} Waiting for DataBase to load up!`);
 	setTimeout(function() {
 		bot.login(process.env.TOKEN); // login to Discord
