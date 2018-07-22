@@ -19,7 +19,7 @@ async function botinfo(bot, message) {
 	const m = await message.channel.send('Calculating BotInfo Please stand by!');
 	const inline = true;
 	const bicon = bot.user.displayAvatarURL;
-	const botembed = new Discord.RichEmbed()
+	const botembed = new Discord.MessageEmbed()
 		.setTitle('Bot Information')
 		.setColor(colorer.botinfo)
 		.setURL('https://github.com/PLASMAchicken/soappy-guard-discordjs')

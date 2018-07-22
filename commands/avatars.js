@@ -3,7 +3,7 @@ module.exports.run = (bot, msg) => {
 	if(!msg.mentions.users.first()) return msg.reply('Specify atleast one User!');
 	if(msg.mentions.users.size >= 3) return msg.reply('You are limited to 3 avatars at once!');
 	msg.mentions.users.forEach(u => {
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setTitle(`${u.tag}'s profile-picutre/avatar`)
 			.setImage(u.displayAvatarURL);
 		msg.channel.send(embed);

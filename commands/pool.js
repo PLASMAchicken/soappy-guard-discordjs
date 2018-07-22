@@ -5,7 +5,7 @@ const agree = '✅';
 const disagree = '❎';
 
 
-const poolembed = new Discord.RichEmbed()
+const poolembed = new Discord.MessageEmbed()
 	.setTitle('Pool')
 	.setFooter(`Use ${agree} or ${disagree} reactions to vote`)
 	.setColor(colorer.pool);

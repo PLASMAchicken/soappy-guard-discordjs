@@ -2,7 +2,7 @@
 const color = require('../config/color.json');
 
 module.exports.run = async (bot, message) => {
-	const restartembed = new Discord.RichEmbed()
+	const restartembed = new Discord.MessageEmbed()
 		.setColor(color.restart)
 		.setThumbnail(bot.user.avatarURL)
 		.setTitle('Status')
