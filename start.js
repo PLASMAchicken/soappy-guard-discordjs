@@ -57,7 +57,7 @@ bot.on('ready', async () => { // when Bot Succesfullly loged into Discord
 	function dblpost() {
 		bot.dbl.postStats(bot.guilds.size).then(dbl => console.log(timestamp() + ' Updated Discord Bot List Stats! ' + require('util').inspect(dbl)));
 	}
-	setInterval(dblpost, 600000);
+	bot.setInterval(dblpost, 600000);
 });
 
 bot.on('message', async message => { // on message run command
