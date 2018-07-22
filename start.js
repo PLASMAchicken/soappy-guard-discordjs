@@ -26,7 +26,7 @@ if(process.env.waitfordb == 'true' || process.env.waitfordb == true) {
 	setTimeout(function() {
 		bot.login(process.env.TOKEN); // login to Discord
 		console.log(`${timestamp()} Database should be ready now!`);
-	}, 45000);
+	}, 100000);
 }
 else{
 	bot.login(process.env.TOKEN); // login to Discord
