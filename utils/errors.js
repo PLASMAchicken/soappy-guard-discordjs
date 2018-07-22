@@ -3,7 +3,7 @@ const colorer = require('../config/color.json');
 const codeblock = '```';
 
 module.exports.noPerms = (message, perm) => {
-	const errorembed = new Discord.RichEmbed();
+	const errorembed = new Discord.MessageEmbed();
 	errorembed.setColor(colorer.error);
 	errorembed.setTitle('While exectuting the last command a Error occured!');
 	errorembed.setFooter('Error occured');
@@ -13,7 +13,7 @@ module.exports.noPerms = (message, perm) => {
 };
 
 module.exports.equalPerms = (message, user, perms) => {
-	const errorembed = new Discord.RichEmbed();
+	const errorembed = new Discord.MessageEmbed();
 	errorembed.setColor(colorer.error);
 	errorembed.setTitle('While exectuting the last command a Error occured!');
 	errorembed.setFooter('Error occured');
@@ -23,7 +23,7 @@ module.exports.equalPerms = (message, user, perms) => {
 };
 
 module.exports.botuser = (message, action) => {
-	const errorembed = new Discord.RichEmbed();
+	const errorembed = new Discord.MessageEmbed();
 	errorembed.setColor(colorer.error);
 	errorembed.setTitle('While exectuting the last command a Error occured!');
 	errorembed.setFooter('Error occured');
@@ -33,7 +33,7 @@ module.exports.botuser = (message, action) => {
 };
 
 module.exports.cantfindUser = (message, invaliduser) => {
-	const errorembed = new Discord.RichEmbed();
+	const errorembed = new Discord.MessageEmbed();
 	errorembed.setColor(colorer.error);
 	errorembed.setTitle('While exectuting the last command a Error occured!');
 	errorembed.setFooter('Error occured');
@@ -43,7 +43,7 @@ module.exports.cantfindUser = (message, invaliduser) => {
 };
 
 module.exports.noReason = (message) => {
-	const errorembed = new Discord.RichEmbed();
+	const errorembed = new Discord.MessageEmbed();
 	errorembed.setColor(colorer.error);
 	errorembed.setTitle('While exectuting the last command a Error occured!');
 	errorembed.setFooter('Error occured');
@@ -52,7 +52,7 @@ module.exports.noReason = (message) => {
 	message.channel.send(errorembed);
 };
 module.exports.err = (message, err) =>{
-	const errorembed = new Discord.RichEmbed();
+	const errorembed = new Discord.MessageEmbed();
 	errorembed.setColor(colorer.error);
 	errorembed.setTitle('While exectuting the last command a Error occured!');
 	errorembed.setFooter('Error occured');
@@ -61,7 +61,7 @@ module.exports.err = (message, err) =>{
 	message.channel.send(errorembed);
 };
 module.exports.dm = (message, err) =>{
-	const errorembed = new Discord.RichEmbed();
+	const errorembed = new Discord.MessageEmbed();
 	errorembed.setColor(colorer.error);
 	errorembed.setTitle('While exectuting the last command a Error occured!');
 	errorembed.setFooter('Error occured');

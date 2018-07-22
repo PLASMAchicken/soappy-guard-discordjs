@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports.run = async (bot, message) => {
-	const embed = new Discord.RichEmbed()
+	const embed = new Discord.MessageEmbed()
 		.addField('Bot Invite', `[[Invite Bot]](https://discordapp.com/api/oauth2/authorize?client_id=${bot.user.id}&permissions=8&scope=bot)`, true)
 		.addField('Support Server', '[[Invite Bot]](https://discord.gg/xeKMCRq)', true);
 	message.channel.send(embed);

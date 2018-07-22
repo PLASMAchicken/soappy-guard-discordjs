@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args, guildConf) => {
 	if(!rUser) return message.channel.send('Couldn\'t find user.');
 	const rreason = args.join(' ').slice(22);
 
-	const reportEmbed = new Discord.RichEmbed()
+	const reportEmbed = new Discord.MessageEmbed()
 		.setDescription('Reports')
 		.setColor('#15f153')
 		.addField('Reported User', `${rUser} with ID: ${rUser.id}`)

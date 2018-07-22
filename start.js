@@ -81,7 +81,7 @@ bot.on('guildCreate', guild => {
 		type: 'WATCHING',
 	});
 	bot.guildsettings.set(guild.id, bot.defaultguildsettings);
-	const guildlog = new Discord.RichEmbed()
+	const guildlog = new Discord.MessageEmbed()
 		.setTitle('New Guild Joined!')
 		.setColor('RANDOM')
 		.addField('Server:', `${guild.name} with ID: ${guild.id} `)
@@ -99,7 +99,7 @@ bot.on('guildDelete', guild => {
 	bot.user.setActivity(`${bot.guilds.size} servers${branch() ? `, on ${branch()} branch` : ''}!`, {
 		type: 'WATCHING',
 	});
-	const guildlog = new Discord.RichEmbed()
+	const guildlog = new Discord.MessageEmbed()
 		.setTitle('Left Guild!')
 		.setColor('RANDOM')
 		.addField('Server:', `${guild.name} with ID: ${guild.id} `)
@@ -131,7 +131,7 @@ bot.dbl.webhook.on('ready', hook => {
 });
 bot.dbl.webhook.on('vote', vote => {
 	console.log(vote);
-	const votelog = new Discord.RichEmbed()
+	const votelog = new Discord.MessageEmbed()
 		.setTitle('VOTE!')
 		.setColor('RANDOM')
 		.addField('Voter:', `${bot.users.get(vote.user) ? bot.users.get(vote.user).tag : vote.user}`)

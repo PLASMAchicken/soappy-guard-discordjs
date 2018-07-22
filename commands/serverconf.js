@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports.run = async (bot, message, args, guildConf) => {
-	const sEmbed = new Discord.RichEmbed()
+	const sEmbed = new Discord.MessageEmbed()
 		.setColor('RANDOM')
 		.setTitle('Guild Configuration:')
 		.setDescription('```js\n' + require('util').inspect(guildConf) + '\n```');

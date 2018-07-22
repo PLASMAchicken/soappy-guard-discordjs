@@ -7,7 +7,7 @@ module.exports.run = async (bot, message) => {
 	if(!userdata.tokens) userdata.tokens = 0;
 	const voted = await bot.dbl.hasVoted(message.author.id);
 	if(voted === true) {
-		const embed = new Discord.RichEmbed();
+		const embed = new Discord.MessageEmbed();
 		const weekend = await bot.dbl.isWeekend();
 		if(weekend === true) {
 			embed.addField('Discord Bot List Bonus!', 'You got 2 Tokens as the Discord Bot List Mulitplicator is activated!');
@@ -21,7 +21,7 @@ module.exports.run = async (bot, message) => {
 		m.edit(embed);
 	}
 	else{
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setTitle('To get your daily token reward you need to Vote!')
 			.setDescription(`[Vote Here](https://discordbots.org/bot/${bot.user.id})`)
 			.setFooter(`You currently have ${userdata.tokens} Tokens`);

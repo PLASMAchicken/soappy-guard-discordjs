@@ -22,7 +22,7 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 			guildConf['setup'] = true;
 			bot.guildsettings.set(message.guild.id, guildConf);
 			console.log('Sent SETUP EMBED to ' + message.guild.name);
-			const setupembed = new Discord.RichEmbed()
+			const setupembed = new Discord.MessageEmbed()
 				.setTitle('Bot Setup')
 				.setDescription('Hello, thanks for adding my Bot')
 				.addField('To get a List of all Commands do', '!help')
@@ -31,6 +31,17 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 				.addField('For Support you can do', '!support')
 				.setColor('RANDOM')
 				.addField('For Feedback you can do', '!request <message>');
+			message.channel.send(setupembed);
+		}
+		if(!guildConf['update'] || guildConf.update != '1') {
+			guildConf['update'] = '1';
+			bot.guildsettings.set(message.guild.id, guildConf);
+			console.log('Sent UPDATE EMBED to ' + message.guild.name);
+			const setupembed = new Discord.MessageEmbed()
+				.setTitle('Bot now Updated!')
+				.addField('Commands added!', '!daily, !tokens')
+				.addField('Now using Discord.js', 'master')
+				.setColor('RANDOM');
 			message.channel.send(setupembed);
 		}
 	}
@@ -44,6 +55,7 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 	const cmd = args.shift().toLowerCase();
 	const commandfile = bot.commands.get(cmd) || bot.commands.find(command => command.help.aliases && command.help.aliases.includes(cmd));
 	if (commandfile) {
+		//if(!message.author.bot && message.author.id != '193406800614129664')return message.reply('Bot is currently experiencing Maintaince! Sorry.');
 		if (message.channel.type === 'text') {
 			const botchannel = message.guild.channels.find(c => c.name == guildConf.botChannel);
 			if(botchannel) {
