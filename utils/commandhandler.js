@@ -55,7 +55,7 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 	const cmd = args.shift().toLowerCase();
 	const commandfile = bot.commands.get(cmd) || bot.commands.find(command => command.help.aliases && command.help.aliases.includes(cmd));
 	if (commandfile) {
-		//if(!message.author.bot && message.author.id != '193406800614129664')return message.reply('Bot is currently experiencing Maintaince! Sorry.');
+		// if(!message.author.bot && message.author.id != '193406800614129664')return message.reply('Bot is currently experiencing Maintaince! Sorry.');
 		if (message.channel.type === 'text') {
 			const botchannel = message.guild.channels.find(c => c.name == guildConf.botChannel);
 			if(botchannel) {
