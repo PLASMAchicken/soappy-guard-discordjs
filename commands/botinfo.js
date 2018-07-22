@@ -16,7 +16,7 @@ module.exports.help = {
 };
 
 async function botinfo(bot, message) {
-	const m = await message.channel.send('Calculating BotInfo Please stand by!');
+	let m = await message.channel.send('Calculating BotInfo Please stand by!');
 	const inline = true;
 	const bicon = bot.user.displayAvatarURL;
 	const botembed = new Discord.MessageEmbed()
@@ -40,7 +40,8 @@ async function botinfo(bot, message) {
 		botembed.addField('For Help:', '[ReadMe](https://github.com/PLASMAchicken/soappy-guard-discordjs/blob/master/README.md) or !help', inline);
 	}
 
-	await m.edit('calculating ping.');
-	await botembed.addField('Ping:', `Latency is ${m.createdTimestamp - message.createdTimestamp}ms.\nAPI Latency is ${Math.round(bot.ping)}ms!\nLatency between receiving and sending is ${m.editedTimestamp - message.createdTimestamp} ms! `);
+	m = await m.edit('calculating ping.');
+	await console.log(message.createdTimestamp + '+' + m.editedTimestamp);
+	await botembed.addField('Ping:', `Latency is ${m.createdTimestamp - message.createdTimestamp}ms.\nAPI Latency is ${Math.round(bot.ping)}ms!\nLatency between receiving and sending is ${await m.editedTimestamp - message.createdTimestamp} ms! `);
 	await m.edit(botembed);
 }

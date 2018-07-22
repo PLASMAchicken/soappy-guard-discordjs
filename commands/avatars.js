@@ -5,7 +5,7 @@ module.exports.run = (bot, msg) => {
 	msg.mentions.users.forEach(u => {
 		const embed = new Discord.MessageEmbed()
 			.setTitle(`${u.tag}'s profile-picutre/avatar`)
-			.setImage(u.displayAvatarURL);
+			.setImage(u.displayAvatarURL());
 		msg.channel.send(embed);
 	});
 };

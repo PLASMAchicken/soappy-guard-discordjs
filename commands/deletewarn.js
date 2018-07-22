@@ -10,7 +10,7 @@ module.exports.run = (bot, message, args) => {
 		const userdata = bot.userdata.get(user.id) || {};
 		if(!userdata.warns) return message.reply('No warns found');
 		if(!userdata.warns[args[1]]) return message.reply('No warn found!');
-		console.log(userdata.warns[args[1]].length);
+		if(userdata.warns[args[1]].guild !== message.guild.id) return message.reply('This warn was not given in this Guild!');
 		delete userdata.warns[args[1]];
 		warnembed.setDescription(args[1] + ' deleted!');
 		bot.userdata.set(user.id, userdata);
@@ -20,6 +20,9 @@ module.exports.run = (bot, message, args) => {
 	message.channel.send(warnembed);
 };
 
+/* TO-DO:
+bot.userdata.find(data => data.warns != undefined ? data.warns['470604247789076484'] : undefined).warns['470604247789076484']
+*/
 
 module.exports.help = {
 	name: 'deletewarn',

@@ -1,36 +1,27 @@
 const Discord = require('discord.js');
 const tempmessage = require('../utils/tempmessage.js');
-const colorer = require('../config/color.json');
 const agree = '✅';
 const disagree = '❎';
 
-
-const poolembed = new Discord.MessageEmbed()
-	.setTitle('Pool')
-	.setFooter(`Use ${agree} or ${disagree} reactions to vote`)
-	.setColor(colorer.pool);
-
-
 module.exports.run = async (bot, message, args) => {
+	const poolembed = new Discord.MessageEmbed()
+		.setTitle('Pool')
+		.setFooter(`Use ${agree} or ${disagree} reactions to vote`)
+		.setColor('RANDOM');
 	const pool = args.join(' ');
 	if (!pool) return tempmessage(message, 'Please provide a pool to vote on!');
 	poolembed.setDescription(pool);
 
 	const msg = await message.channel.send(poolembed);
+	const filter = (reaction, user) => (reaction.emoji.name == agree || reaction.emoji.name == disagree);
+	const reactions = await msg.awaitReactions(filter, { time: 16000 });
 	await msg.react(agree);
 	await msg.react(disagree);
-	const filter = (reaction) => reaction.emoji.name == agree || reaction.emoji.name == disagree;
-	const reactions = await msg.awaitReactions(filter, { time: 16000 });
-	const reactionsa = reactions;
-	let agreec, disagreec;
-	if(reactions.get(agree)) {agreec = await reactions.get(agree).count - 1;}
-	else{agreec = 0;}
-	if(reactions.get(disagree)) {disagreec = await reactionsa.get(disagree).count - 1;}
-	else{disagreec = 0;}
-
-	poolembed.setDescription(`Voting complete! \n\n${agree}: ${agreec}\n${disagree}: ${disagreec}`);
+	poolembed.setDescription(`Voting complete! \n\n${agree}: ${await reactions.get(agree) ? reactions.get(agree).count - 1 : 0}\n${disagree}: ${await reactions.get(disagree) ? reactions.get(disagree).count - 1 : 0}`);
+	poolembed.addField('Question:', pool);
+	poolembed.setColor('RANDOM');
 	msg.edit(poolembed);
-	msg.clearReactions();
+	msg.reactions.clear();
 
 
 };
