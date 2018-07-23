@@ -14,9 +14,9 @@ module.exports.run = async (bot, message, args) => {
 
 	const msg = await message.channel.send(poolembed);
 	const filter = (reaction, user) => (reaction.emoji.name == agree || reaction.emoji.name == disagree);
-	const reactions = await msg.awaitReactions(filter, { time: 16000 });
 	await msg.react(agree);
 	await msg.react(disagree);
+	const reactions = await msg.awaitReactions(filter, { time: 16000 });
 	poolembed.setDescription(`Voting complete! \n\n${agree}: ${await reactions.get(agree) ? reactions.get(agree).count - 1 : 0}\n${disagree}: ${await reactions.get(disagree) ? reactions.get(disagree).count - 1 : 0}`);
 	poolembed.addField('Question:', pool);
 	poolembed.setColor('RANDOM');

@@ -12,7 +12,6 @@
     "npm": "*"
   },
   "dependencies": {
-    "@types/node": "^10.5.2",
     "cheerio": "^1.0.0-rc.2",
     "dblapi.js": "^2.2.0",
     "discord.js": "github:discordjs/discord.js",
@@ -20,9 +19,9 @@
     "enmap": "^2.6.3",
     "enmap-level": "^2.1.0",
     "enmap-sqlite": "^2.0.3",
-    "eslint": "^5.1.0",
+    "eslint": "^5.2.0",
     "ms": "^2.1.1",
-    "node-fetch": "^2.1.2",
+    "node-fetch": "^2.2.0",
     "processmaker": "^0.1.1",
     "random-bytes": "^1.0.0",
     "request": "^2.86.0",
