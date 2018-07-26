@@ -1,5 +1,5 @@
 const hasbotperms = require('../utils/hasperms.js');
-const Discord = require('../node_modules/discord.js/src/index.js');
+const Discord = require('discord.js');
 
 module.exports.run = (bot, message, args) => {
 	if(args[0] == 'add') {

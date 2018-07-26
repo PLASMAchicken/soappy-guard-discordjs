@@ -1,4 +1,4 @@
-const Discord = require('../node_modules/discord.js/src/index.js');
+const Discord = require('discord.js');
 
 module.exports.run = async (bot, message, args, guildConf) => {
 	if (!args[0] || args[0 == 'help']) return message.reply(`Usage: ${guildConf.prefix}${this.help.name} <key> <new value>`);

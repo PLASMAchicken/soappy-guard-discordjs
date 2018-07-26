@@ -1,4 +1,4 @@
-const Discord = require('../node_modules/discord.js/src/index.js');
+const Discord = require('discord.js');
 const fs = require('fs');
 const errors = require('../utils/errors.js');
 

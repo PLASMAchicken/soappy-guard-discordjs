@@ -1,5 +1,5 @@
 // Packages
-const Discord = require('../node_modules/discord.js/src/index.js'); // For Embed
+const Discord = require('discord.js'); // For Embed
 const colorer = require('../config/color.json'); // For color
 const uptime = require('../utils/uptime.js'); // For uptime
 const branch = require('../utils/branch.js'); // For current branch

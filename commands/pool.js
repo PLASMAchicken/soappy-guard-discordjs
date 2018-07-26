@@ -1,4 +1,4 @@
-const Discord = require('../node_modules/discord.js/src/index.js');
+const Discord = require('discord.js');
 const tempmessage = require('../utils/tempmessage.js');
 const agree = '✅';
 const disagree = '❎';
