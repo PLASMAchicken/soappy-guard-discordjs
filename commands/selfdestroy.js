@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const Discord = require('../node_modules/discord.js/src/index.js');;
 const split = require('../utils/split.js');
 
 

@@ -1,7 +1,7 @@
 const launchtime = new Date; // used for started in 1999ms!
 // Packages
 require('dotenv').config(); // Replaces Token File
-const Discord = require('discord.js');
+const Discord = require('./node_modules/discord.js/src/index.js');
 
 // Configs
 const botconfig = require('./config/botconfig.json'); // load bot config

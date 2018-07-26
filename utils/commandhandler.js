@@ -1,7 +1,7 @@
 // Packages
 const fs = require('fs');
 const ms = require('ms');
-const Discord = require('discord.js');
+const Discord = require('../node_modules/discord.js/src/index.js');;
 
 // Utils
 const hasbotperms = require('../utils/hasperms.js');
@@ -13,10 +13,10 @@ const botconfig = require('../config/botconfig.json');
 
 module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 	if (message.author.bot) return; // message author =  bot => return
-	if(!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return;
-	if(!message.channel.permissionsFor(message.guild.me).has('EMBED_LINKS')) return message.channel.send('I need EMBED_LINKS Permission to work properly!');
 	let guildConf;
 	if (message.channel.type === 'text') {
+		if(!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return;
+		if(!message.channel.permissionsFor(message.guild.me).has('EMBED_LINKS')) return message.channel.send('I need EMBED_LINKS Permission to work properly!');
 		guildConf = bot.guildsettings.get(message.guild.id) || bot.defaultguildsettings;
 		if(!guildConf['setup'] || guildConf.setup != true) {
 			guildConf['setup'] = true;

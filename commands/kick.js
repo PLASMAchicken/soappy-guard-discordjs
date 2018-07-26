@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const Discord = require('../node_modules/discord.js/src/index.js');;
 
 module.exports.run = async (bot, message, args, guildConf) => {
 	const kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
