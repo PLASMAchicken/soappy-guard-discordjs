@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('../node_modules/discord.js/src/index.js');;
+const { MessageEmbed } = require('./node_modules/discord.js/src/index.js');
 
 module.exports.add = async (reaction, user, bot) => {
 	const message = reaction.message;

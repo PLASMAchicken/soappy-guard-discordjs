@@ -1,4 +1,4 @@
-const Discord = require('../node_modules/discord.js/src/index.js');;
+const Discord = require('../node_modules/discord.js/src/index.js');
 const SnowflakeUtil = Discord.SnowflakeUtil;
 
 module.exports.run = async (bot, message, args) => {

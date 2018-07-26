@@ -1,4 +1,4 @@
-const Discord = require('../node_modules/discord.js/src/index.js');;
+const Discord = require('../node_modules/discord.js/src/index.js');
 const botconfig = require('../config/botconfig.json');
 const colorer = require('../config/color.json');
 

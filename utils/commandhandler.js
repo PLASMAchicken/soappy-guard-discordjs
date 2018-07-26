@@ -1,7 +1,7 @@
 // Packages
 const fs = require('fs');
 const ms = require('ms');
-const Discord = require('../node_modules/discord.js/src/index.js');;
+const Discord = require('../node_modules/discord.js/src/index.js');
 
 // Utils
 const hasbotperms = require('../utils/hasperms.js');

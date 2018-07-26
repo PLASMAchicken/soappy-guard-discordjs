@@ -1,5 +1,5 @@
 /* eslint no-unused-vars: 0  */
-const Discord = require('../node_modules/discord.js/src/index.js');;
+const Discord = require('../node_modules/discord.js/src/index.js');
 const request = require('snekfetch');
 const botconfig = require('../config/botconfig.json');
 

@@ -1,4 +1,4 @@
-const Discord = require('../node_modules/discord.js/src/index.js');;
+const Discord = require('../node_modules/discord.js/src/index.js');
 const ms = require('ms');
 
 module.exports.run = async (bot, message) => {
