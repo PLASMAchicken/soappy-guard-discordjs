@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { RichEmbed } = require('discord.js');
 
 module.exports.add = async (reaction, user, bot) => {
 	const message = reaction.message;
@@ -22,7 +22,7 @@ module.exports.add = async (reaction, user, bot) => {
 		const star = /^⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
 		const foundStar = stars.embeds[0];
 		const image = message.attachments.size > 0 ? await extension(reaction, message.attachments.array()[0].url) : '';
-		const embed = new MessageEmbed()
+		const embed = new RichEmbed()
 			.setColor(foundStar.color)
 			.setDescription(foundStar.description)
 			.setAuthor(message.author.tag, message.author.displayAvatarURL)
@@ -35,7 +35,7 @@ module.exports.add = async (reaction, user, bot) => {
 	if (!stars) {
 		const image = message.attachments.size > 0 ? await extension(reaction, message.attachments.array()[0].url) : '';
 		if (image === '' && message.cleanContent.length < 1) return message.channel.send(`${user}, you cannot star an empty message.`);
-		const embed = new MessageEmbed()
+		const embed = new RichEmbed()
 			.setColor(15844367)
 			.setDescription(message.cleanContent)
 			.setAuthor(message.author.tag, message.author.displayAvatarURL)
@@ -58,7 +58,7 @@ module.exports.remove = async (reaction, user, bot) => {
 		const star = /^⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.embeds[0].footer.text);
 		const foundStar = stars.embeds[0];
 		const image = message.attachments.size > 0 ? await extension(reaction, message.attachments.array()[0].url) : '';
-		const embed = new MessageEmbed()
+		const embed = new RichEmbed()
 			.setColor(foundStar.color)
 			.setDescription(foundStar.description)
 			.setAuthor(message.author.tag, message.author.displayAvatarURL)

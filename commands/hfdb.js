@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args) => {
 		const exporter = `module.exports = defaultSettings = ${JSON.stringify(bot.defaultguildsettings, null, 2)}`;
 		fs.writeFileSync('./config/defaultguildsettings.js', exporter, 'utf-8');
 
-		const sEmbed = new Discord.MessageEmbed()
+		const sEmbed = new Discord.RichEmbed()
 			.setColor('RANDOM')
 			.setTitle(`${args.join(' ')} set!`)
 			.setDescription(`GlobalGuild configuration item \`${key}\` has been changed to:\n\`\`\`js\n${value}\n\`\`\``);
@@ -34,7 +34,7 @@ module.exports.run = async (bot, message, args) => {
 		delete bot.defaultguildsettings[key];
 		const exporter = `module.exports = defaultSettings = ${JSON.stringify(bot.defaultguildsettings, null, 2)}`;
 		fs.writeFileSync('./config/defaultguildsettings.js', exporter, 'utf-8');
-		const sEmbed = new Discord.MessageEmbed()
+		const sEmbed = new Discord.RichEmbed()
 			.setColor('RANDOM')
 			.setTitle(`${key} deleted!`)
 			.setDescription(`GlobalGuild configuration item \`${args.join(' ')}\` has been removed!`);

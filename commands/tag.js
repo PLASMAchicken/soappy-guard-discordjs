@@ -11,7 +11,7 @@ module.exports.run = (bot, message, args) => {
 		tag.owner = message.author.id;
 		tag.content = tagcontent;
 		if(bot.tags.get(tagname)) return message.reply(`Tag: ${tagname} already exists!`);
-		const infoembed = new Discord.MessageEmbed()
+		const infoembed = new Discord.RichEmbed()
 			.setTitle(`Added Tag: ${tagname}`)
 			.setColor('RANDOM');
 		message.channel.send(infoembed);
@@ -31,7 +31,7 @@ module.exports.run = (bot, message, args) => {
 		if(tag.owner != message.author.id) return message.reply('You do not own this tag!');
 		const tagcontent = args.join(' ');
 		tag.content = tagcontent;
-		const infoembed = new Discord.MessageEmbed()
+		const infoembed = new Discord.RichEmbed()
 			.setTitle(`Edited Tag: ${tagname}`)
 			.setColor('RANDOM');
 		message.channel.send(infoembed);
@@ -43,7 +43,7 @@ module.exports.run = (bot, message, args) => {
 		if(!bot.tags.get(tagname)) return message.reply('No tag found!');
 		const tagowner = bot.tags.get(tagname).owner;
 		if(tagowner != message.author.id) return message.reply('You do not own this tag!\nIf you think this tag should be deleted then use !request or speak with a BOT Admin');
-		const deleteembed = new Discord.MessageEmbed()
+		const deleteembed = new Discord.RichEmbed()
 			.setTitle(`Deleted Tag: ${tagname}`)
 			.setColor('RANDOM');
 		message.channel.send(deleteembed);
@@ -54,7 +54,7 @@ module.exports.run = (bot, message, args) => {
 		const tagname = args.shift();
 		if(!bot.tags.get(tagname)) return message.reply('No tag found!');
 		if(hasbotperms.admin(message.author, message) == true) {
-			const deleteembed = new Discord.MessageEmbed()
+			const deleteembed = new Discord.RichEmbed()
 				.setTitle(`Deleted Tag: ${tagname}`)
 				.setDescription(`Tag created by: ${bot.tags.get(tagname).owner}`)
 				.setColor('RANDOM');
@@ -66,13 +66,13 @@ module.exports.run = (bot, message, args) => {
 		args.shift();
 		const tagname = args.shift();
 		if(!bot.tags.get(tagname)) return message.reply('No tag found!');
-		const infoembed = new Discord.MessageEmbed()
+		const infoembed = new Discord.RichEmbed()
 			.setTitle(`Tag: ${tagname}`)
 			.setDescription(`Tag created by: ${bot.tags.get(tagname).owner}\n${bot.users.get(bot.tags.get(tagname).owner) == '' ? bot.users.get(bot.tags.get(tagname).owner).tag : 'User not resolveable!' }`);
 		message.channel.send(infoembed);
 	}
 	else if (args[0] == 'list') {
-		const infoembed = new Discord.MessageEmbed()
+		const infoembed = new Discord.RichEmbed()
 			.setTitle(message.author.tag + '`s Tags');
 		if(bot.userdata.get(message.author.id)) {
 			const usertags = bot.userdata.get(message.author.id).tags || [];

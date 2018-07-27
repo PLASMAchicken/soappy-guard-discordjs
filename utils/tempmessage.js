@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const botconfig = require('../config/botconfig.json');
 const colorer = require('../config/color.json');
 
-const tempembed = new Discord.MessageEmbed()
+const tempembed = new Discord.RichEmbed()
 	.setTitle('TempEmbed')
 	.setTimestamp(new Date)
 	.setColor(colorer.temp);

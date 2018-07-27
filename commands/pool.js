@@ -4,7 +4,7 @@ const agree = '✅';
 const disagree = '❎';
 
 module.exports.run = async (bot, message, args) => {
-	const poolembed = new Discord.MessageEmbed()
+	const poolembed = new Discord.RichEmbed()
 		.setTitle('Pool')
 		.setFooter(`Use ${agree} or ${disagree} reactions to vote`)
 		.setColor('RANDOM');

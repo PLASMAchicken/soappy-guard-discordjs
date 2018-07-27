@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args) => {
 	userdata.warns[warnid].moderator = message.author.id;
 	userdata.warns[warnid].guild = message.guild.id;
 	bot.userdata.set(towarn.id, userdata);
-	const warnembed = new Discord.MessageEmbed()
+	const warnembed = new Discord.RichEmbed()
 		.setTitle(towarn.user.tag + ' warned!')
 		.setDescription(`[${warnid}] : ${warn}`)
 		.setColor('RANDOM')

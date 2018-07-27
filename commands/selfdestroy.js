@@ -5,7 +5,7 @@ const split = require('../utils/split.js');
 module.exports.run = async (bot, message, args) => {
 
 	const data = split(args);
-	const embed = new Discord.MessageEmbed();
+	const embed = new Discord.RichEmbed();
 	embed.setAuthor(message.author.username, message.author.avatarURL);
 	let time;
 	for (let i = 0; i < data.length; i++) {

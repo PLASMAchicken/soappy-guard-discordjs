@@ -23,7 +23,7 @@ module.exports.send = (message) => {
 };
 
 module.exports.embedhelp = (message) => {
-	const helpembed = new require('dicsord.js').MessageEmbed()
+	const helpembed = new require('dicsord.js').RichEmbed()
 		.setTitle(' Help Document')
 		.setColor('RANDOM')
 		.setTitle('HelpDocument for !embed')

@@ -8,7 +8,7 @@ module.exports.run = (bot, message, args, guildConf) => {
 	if(bUser.hasPermission('MANAGE_MESSAGES')) return message.channel.send('That person can\'t be banned!');
 
 	const modLog = message.guild.channels.find(channel => channel.name === guildConf.modLogChannel);
-	const banEmbed = new Discord.MessageEmbed()
+	const banEmbed = new Discord.RichEmbed()
 		.setDescription('~Ban~')
 		.setColor('#bc0000')
 		.addField('Banned User', `${bUser} with ID ${bUser.id}`)

@@ -10,7 +10,7 @@ module.exports.run = (bot, message, args) => {
 	if(args[0] == 'help') {
 		return helper.embedhelp(message);
 	}
-	const embed = new Discord.MessageEmbed();
+	const embed = new Discord.RichEmbed();
 	embed.setAuthor(message.author.username, message.author.avatarURL);
 	const data = spliter(args);
 	for (let i = 0; i < data.length; i++) {

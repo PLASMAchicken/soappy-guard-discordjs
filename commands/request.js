@@ -4,7 +4,7 @@ const colorer = require('../config/color.json');
 module.exports.run = async (bot, message, args) => {
 	const feedback = args.join(' ');
 
-	const feedbackEmbed = new Discord.MessageEmbed()
+	const feedbackEmbed = new Discord.RichEmbed()
 		.setDescription('Feedback')
 		.setColor(colorer.feedback)
 		.addField('Requested by', `${message.author.tag} with ID: ${message.author.id}`)

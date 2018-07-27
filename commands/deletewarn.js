@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 module.exports.run = (bot, message, args) => {
 	const user = message.mentions.users.first() || bot.users.get(args[0]);
 	if(!user || message.author.id == user.id) return message.reply('User was not found! :I');
-	const warnembed = new Discord.MessageEmbed()
+	const warnembed = new Discord.RichEmbed()
 		.setColor('RANDOM')
 		.setTitle(user.tag);
 	if(bot.userdata.get(user.id)) {

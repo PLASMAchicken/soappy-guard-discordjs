@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 module.exports.run = async (bot, message, args) => {
 	const user = message.mentions.users.first() || bot.users.get(args[0]) || message.author;
-	const warnembed = new Discord.MessageEmbed()
+	const warnembed = new Discord.RichEmbed()
 		.setColor('RANDOM')
 		.setTitle(user.tag + '\'s warns:');
 	if(bot.userdata.get(user.id)) {

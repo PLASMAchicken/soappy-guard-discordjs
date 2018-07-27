@@ -22,7 +22,7 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 			guildConf['setup'] = true;
 			bot.guildsettings.set(message.guild.id, guildConf);
 			console.log('Sent SETUP EMBED to ' + message.guild.name);
-			const setupembed = new Discord.MessageEmbed()
+			const setupembed = new Discord.RichEmbed()
 				.setTitle('Bot Setup')
 				.setDescription('Hello, thanks for adding my Bot')
 				.addField('To get a List of all Commands do', '!help')
@@ -37,7 +37,7 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 			guildConf['update'] = '1';
 			bot.guildsettings.set(message.guild.id, guildConf);
 			console.log('Sent UPDATE EMBED to ' + message.guild.name);
-			const setupembed = new Discord.MessageEmbed()
+			const setupembed = new Discord.RichEmbed()
 				.setTitle('Bot now Updated!')
 				.addField('Commands added!', '!daily, !tokens')
 				.addField('Now using Discord.js', 'master')

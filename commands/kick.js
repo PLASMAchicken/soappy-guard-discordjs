@@ -9,7 +9,7 @@ module.exports.run = async (bot, message, args, guildConf) => {
 	if(kUser.hasPermission('MANAGE_MESSAGES')) return message.channel.send('That person can\'t be kicked!');
 
 	const modLog = message.guild.channels.find(channel => channel.name === guildConf.modLogChannel);
-	const kickEmbed = new Discord.MessageEmbed()
+	const kickEmbed = new Discord.RichEmbed()
 		.setDescription('~Kick~')
 		.setColor('#e56b00')
 		.addField('Kicked User', `${kUser} with ID ${kUser.id}`)
