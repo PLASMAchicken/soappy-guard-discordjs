@@ -30,7 +30,9 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node start.js"
+	"start": "node start.js",
+	"lint": "eslint .",
+	"lintfix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
