@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
 	poolembed.setDescription(pool);
 
 	const msg = await message.channel.send(poolembed);
-	const filter = (reaction, user) => (reaction.emoji.name == agree || reaction.emoji.name == disagree);
+	const filter = (reaction) => (reaction.emoji.name == agree || reaction.emoji.name == disagree);
 	await msg.react(agree);
 	await msg.react(disagree);
 	const reactions = await msg.awaitReactions(filter, { time: 16000 });
