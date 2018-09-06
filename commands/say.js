@@ -1,4 +1,4 @@
-const errors = require('../utils/errors.js');
+const errors = require(process.cwd() + '/utils/errors.js');
 
 module.exports.run = async (bot, message, args) => {
 	message.delete();

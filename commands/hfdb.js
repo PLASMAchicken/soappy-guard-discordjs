@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const errors = require('../utils/errors.js');
+const errors = require(process.cwd() + '/utils/errors.js');
 
 module.exports.run = async (bot, message, args) => {
 	if(args[0] == 'edit') {

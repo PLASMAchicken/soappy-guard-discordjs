@@ -3,7 +3,7 @@ const fs = require('fs');
 module.exports.run = (bot, message, args) => {
 	const kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
 	if(kUser) {
-		const obj = require('../config/botconfig.json');
+		const obj = require(process.cwd() + '/config/botconfig.json');
 
 		obj.botadmins[obj.botadmins.length] = kUser.id;
 		fs.writeFile('./config/botconfig.json', JSON.stringify(obj, null, 4), function(err) {

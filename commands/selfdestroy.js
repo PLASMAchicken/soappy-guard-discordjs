@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const split = require('../utils/split.js');
+const split = require(process.cwd() + '/utils/split.js');
 
 
 module.exports.run = async (bot, message, args) => {

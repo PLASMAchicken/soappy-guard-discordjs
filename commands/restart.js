@@ -1,5 +1,5 @@
 ﻿const Discord = require('discord.js');
-const color = require('../config/color.json');
+const color = require(process.cwd() + '/config/color.json');
 
 module.exports.run = async (bot, message) => {
 	const restartembed = new Discord.RichEmbed()

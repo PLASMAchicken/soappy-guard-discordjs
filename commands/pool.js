@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const tempmessage = require('../utils/tempmessage.js');
+const tempmessage = require(process.cwd() + '/utils/tempmessage.js');
 const agree = '✅';
 const disagree = '❎';
 

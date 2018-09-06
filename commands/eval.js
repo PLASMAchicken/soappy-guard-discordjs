@@ -1,7 +1,7 @@
 /* eslint no-unused-vars: 0  */
 const Discord = require('discord.js');
 const request = require('snekfetch');
-const botconfig = require('../config/botconfig.json');
+const botconfig = require(process.cwd() + '/config/botconfig.json');
 
 const cblockre = /(^```js)|(```$)/g;
 

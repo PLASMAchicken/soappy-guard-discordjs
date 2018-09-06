@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const colorer = require('../config/color.json');
+const colorer = require(process.cwd() + '/config/color.json');
 
 module.exports.run = async (bot, message, args) => {
 	const feedback = args.join(' ');

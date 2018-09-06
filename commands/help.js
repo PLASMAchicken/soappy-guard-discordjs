@@ -1,4 +1,4 @@
-const helpembed = require('../utils/help.js');
+const helpembed = require(process.cwd() + '/utils/help.js');
 const ms = require('ms');
 
 module.exports.run = (bot, message, args, guildConf) => {

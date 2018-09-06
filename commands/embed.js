@@ -1,7 +1,7 @@
 ﻿const Discord = require('discord.js');
-const errors = require('../utils/errors.js');
-const helper = require('../utils/help.js');
-const spliter = require('../utils/split.js');
+const errors = require(process.cwd() + '/utils/errors.js');
+const helper = require(process.cwd() + '/utils/help.js');
+const spliter = require(process.cwd() + '/utils/split.js');
 
 
 module.exports.run = (bot, message, args) => {

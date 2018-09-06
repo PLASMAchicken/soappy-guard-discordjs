@@ -1,8 +1,8 @@
 // Packages
 const Discord = require('discord.js'); // For Embed
-const colorer = require('../config/color.json'); // For color
-const uptime = require('../utils/uptime.js'); // For uptime
-const branch = require('../utils/branch.js'); // For current branch
+const colorer = require(process.cwd() + '/config/color.json'); // For color
+const uptime = require(process.cwd() + '/utils/uptime.js'); // For uptime
+const branch = require(process.cwd() + '/utils/branch.js'); // For current branch
 
 module.exports.run = (bot, message) => {
 	botinfo(bot, message);
