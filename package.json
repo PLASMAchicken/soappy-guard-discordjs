@@ -12,6 +12,7 @@
     "npm": "*"
   },
   "dependencies": {
+    "chalk": "^2.4.1",
     "cheerio": "^1.0.0-rc.2",
     "dblapi.js": "^2.2.0",
     "discord.js": "^11.4.2",
