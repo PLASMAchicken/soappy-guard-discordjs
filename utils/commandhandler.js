@@ -1,5 +1,4 @@
 // Packages
-const fs = require('fs');
 const ms = require('ms');
 const Discord = require('discord.js');
 
@@ -123,10 +122,14 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 		message.channel.stopTyping(true);
 	}
 };
+
+const fs = require('fs');
+
 module.exports.start = (bot, timestamp) => { // load commands from command dir
+	let errorc = 0;
 	fs.readdir('./commands/', (err, files) => { // read dir
 		if(err) { // err =>
-			if (err.errno == -4058) { // err code = -4059 => dir not present
+			if (err.errno == -4058) { // err code = -4058 => dir not present
 				fs.mkdirSync('./commands'); // => make dir
 				console.log('Command folder was not found! Creating ./commands/ \n Please restart Bot!'); // => log
 				return process.exit(); // => return
@@ -136,16 +139,52 @@ module.exports.start = (bot, timestamp) => { // load commands from command dir
 				return process.exit(); // => exit
 			}
 		}
-		const jsfile = files.filter(f => f.split('.').pop() === 'js'); // get all .js files
-		if (jsfile.length <= 0) { // if no commands present
-			return console.log(timestamp() + 'Couldn\'t find commands.'); // log no commands => close commandhandler and start bot
-		}
-		jsfile.forEach((f) => { // if commands present
-			const props = require(`../commands/${f}`); // => load each one
 
-			console.log(`${timestamp()} ${f} loaded!`); // => log that command got loaded
-			help.add(props); // => add command info to help
-			bot.commands.set(props.help.name, props); // => add command to command list
-		}); // => close commandhandler and start bot
-	});
+		const jsfile = files.filter(f => f.split('.').pop() === 'js' && !fs.statSync(process.cwd() + '/commands/' + f).isDirectory()); // get all .js files
+		const categorys = files.filter(f => fs.statSync(process.cwd() + '/commands/' + f).isDirectory());
+
+		console.log(jsfile);
+		console.log(categorys);
+
+		if (jsfile.length <= 0 && categorys.length <= 0) { // if no commands present
+			return console.log(timestamp() + ' Couldn\'t find commands.'); // log no commands => close commandhandler and start bot
+		}
+
+
+		jsfile.forEach((f) => { // if commands present
+			try{
+				const props = require(`../commands/${f}`); // => load each one
+
+				console.log(`${timestamp()} ${f} loaded!`); // => log that command got loaded
+				help.add(props); // => add command info to help
+				bot.commands.set(props.help.name, props); // => add command to command list
+			}
+			catch(err) {
+				errorc++;
+				console.error(`${timestamp()} ${f} failed to load!\n${timestamp()} ${err}\n${timestamp()} ${err.stack}\n`);
+			}
+		});
+
+		categorys.forEach(category =>{
+			const catfiles = fs.readdirSync('./commands/' + category).filter(f => f.split('.').pop() === 'js' && !fs.statSync(process.cwd() + '/commands/' + category + '/' + f).isDirectory());
+
+			catfiles.forEach(f => {
+				try{
+					const props = require(`../commands/${category}/${f}`); // => load each one
+
+					console.log(`${timestamp()} ${f} loaded!`); // => log that command got loaded
+					props.help.category = category;
+					help.add(props); // => add command info to help
+					bot.commands.set(props.help.name, props); // => add command to command list
+				}
+				catch(err) {
+					errorc++;
+					console.error(`${timestamp()} ${f} failed to load!\n${timestamp()} ${err}\n${timestamp()} ${err.stack}\n`);
+				}
+			});
+		});
+
+
+		console.log(`${timestamp()} ${bot.commands.size} Commands loaded! ${errorc == 0 ? '' : `${errorc} Error occured!` }`);
+	}); // => close commandhandler and start bot
 };
