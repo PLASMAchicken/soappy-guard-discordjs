@@ -142,10 +142,6 @@ module.exports.start = (bot, timestamp) => { // load commands from command dir
 
 		const jsfile = files.filter(f => f.split('.').pop() === 'js' && !fs.statSync(process.cwd() + '/commands/' + f).isDirectory()); // get all .js files
 		const categorys = files.filter(f => fs.statSync(process.cwd() + '/commands/' + f).isDirectory());
-
-		console.log(jsfile);
-		console.log(categorys);
-
 		if (jsfile.length <= 0 && categorys.length <= 0) { // if no commands present
 			return console.log(timestamp() + ' Couldn\'t find commands.'); // log no commands => close commandhandler and start bot
 		}
