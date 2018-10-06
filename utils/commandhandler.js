@@ -20,7 +20,7 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 		if(!guildConf['setup'] || guildConf.setup != true) {
 			guildConf['setup'] = true;
 			bot.guildsettings.set(message.guild.id, guildConf);
-			console.log('Sent SETUP EMBED to ' + message.guild.name);
+			console.log(bot.chalk.greenBright('Sent SETUP EMBED to ' + message.guild.name));
 			const setupembed = new Discord.RichEmbed()
 				.setTitle('Bot Setup')
 				.setDescription('Hello, thanks for adding my Bot')
@@ -35,7 +35,7 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 		if(!guildConf['update'] || guildConf.update != '1') {
 			guildConf['update'] = '1';
 			bot.guildsettings.set(message.guild.id, guildConf);
-			console.log('Sent UPDATE EMBED to ' + message.guild.name);
+			console.log(bot.chalk.greenBright('Sent UPDATE EMBED to ' + message.guild.name));
 			const setupembed = new Discord.RichEmbed()
 				.setTitle('Bot now Updated!')
 				.addField('Commands added!', '!daily, !tokens')
@@ -66,32 +66,32 @@ module.exports.run = async (message, bot, timestamp) => { // commandhandler.run
 					});
 				}
 			}
-			console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} request by ${message.author.username} @ ${message.guild.name} `); // if command can run => log action
+			console.log(bot.chalk.greenBright(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} request by ${message.author.username} @ ${message.guild.name} `)); // if command can run => log action
 		}
 		else {
 			if(commandfile.help.disableindm == true)return message.channel.send('Sorry this Command is not yet supported!'); // check if command is supported in dm if not => return
-			console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} request by ${message.author.username} @ ${message.author.id} `); // if command can run => log action
+			console.log(bot.chalk.greenBright(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} request by ${message.author.username} @ ${message.author.id} `)); // if command can run => log action
 		}
 		if(commandfile.help.requires) {
 			if(commandfile.help.requires.includes('botowner')) {
 				if(hasbotperms.owner(message.author, message) != true) { // if not botowner => return
-					return console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Bot Owner! `);
+					return console.log(bot.chalk.red(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Bot Owner! `));
 				}
 			}
 			else if (commandfile.help.requires.includes('botadmin')) {
 				if(hasbotperms.admin(message.author, message) != true) { // if not botadmin => return
-					return console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Bot Admin! `);
+					return console.log(bot.chalk.red(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Bot Admin! `));
 				}
 			}
 			else if (message.channel.type === 'text') {
 				if (commandfile.help.requires.includes('adminrole')) {
 					const adminRole = message.guild.roles.find(r => r.name == guildConf.adminRole);
-					if (!message.member.hasPermission('ADMINISTRATOR') && (!adminRole || !message.member.roles.has(adminRole.id))) return errors.noPerms(message, guildConf.adminRole + ' role'), console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Server Admin! `);
+					if (!message.member.hasPermission('ADMINISTRATOR') && (!adminRole || !message.member.roles.has(adminRole.id))) return errors.noPerms(message, guildConf.adminRole + ' role'), console.log(bot.chalk.greenBright(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Server Admin! `));
 				}
 				else if (commandfile.help.requires.includes('staffrole')) {
 					const adminRole = message.guild.roles.find(r => r.name == guildConf.adminRole);
 					const staffRole = message.guild.roles.find(r => r.name == guildConf.staffRole);
-					if (!message.member.hasPermission('ADMINISTRATOR') && (!staffRole || !message.member.roles.has(staffRole.id) && (!adminRole || !message.member.roles.has(adminRole.id)))) return errors.noPerms(message, guildConf.staffRole + ' role'), console.log(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Server Staff! `);
+					if (!message.member.hasPermission('ADMINISTRATOR') && (!staffRole || !message.member.roles.has(staffRole.id) && (!adminRole || !message.member.roles.has(adminRole.id)))) return errors.noPerms(message, guildConf.staffRole + ' role'), console.log(bot.chalk.greenBright(`${timestamp()} [Ping:${Math.round(bot.ping)}ms] ${commandfile.help.name} failed!: Not Server Staff! `));
 				}
 			}
 		}
@@ -151,13 +151,13 @@ module.exports.start = (bot, timestamp) => { // load commands from command dir
 			try{
 				const props = require(`../commands/${f}`); // => load each one
 
-				console.log(`${timestamp()} ${f} loaded!`); // => log that command got loaded
+				console.log(bot.chalk.cyan(`${timestamp()} ${f} loaded!`)); // => log that command got loaded
 				help.add(props); // => add command info to help
 				bot.commands.set(props.help.name, props); // => add command to command list
 			}
 			catch(err) {
 				errorc++;
-				console.error(`${timestamp()} ${f} failed to load!\n${timestamp()} ${err}\n${timestamp()} ${err.stack}\n`);
+				console.error(bot.chalk.red(`${timestamp()} ${f} failed to load!\n${timestamp()} ${err}\n${timestamp()} ${err.stack}\n`));
 			}
 		});
 
@@ -168,19 +168,19 @@ module.exports.start = (bot, timestamp) => { // load commands from command dir
 				try{
 					const props = require(`../commands/${category}/${f}`); // => load each one
 
-					console.log(`${timestamp()} ${f} loaded!`); // => log that command got loaded
+					console.log(bot.chalk.cyan(`${timestamp()} ${f} in category ${category} loaded!`)); // => log that command got loaded
 					props.help.category = category;
 					help.add(props); // => add command info to help
 					bot.commands.set(props.help.name, props); // => add command to command list
 				}
 				catch(err) {
 					errorc++;
-					console.error(`${timestamp()} ${f} failed to load!\n${timestamp()} ${err}\n${timestamp()} ${err.stack}\n`);
+					console.error(bot.chalk.red(`${timestamp()} ${f} failed to in ${category} load!\n${timestamp()} ${err}\n${timestamp()} ${err.stack}\n`));
 				}
 			});
 		});
 
 
-		console.log(`${timestamp()} ${bot.commands.size} Commands loaded! ${errorc == 0 ? '' : `${errorc} Error occured!` }`);
+		console.log(bot.chalk.yellow(`${timestamp()} ${bot.commands.size} Commands loaded! ${errorc == 0 ? '' : `${errorc} Error occured!` }`));
 	}); // => close commandhandler and start bot
 };

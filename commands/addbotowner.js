@@ -8,7 +8,7 @@ module.exports.run = (bot, message, args) => {
 
 		obj.botowners[obj.botowners.length] = kUser.id;
 		fs.writeFile('./config/botconfig.json', JSON.stringify(obj, null, 4), function(err) {
-			if(err) console.log(err);
+			if(err) console.log(bot.chalk.red(err));
 			if(!err) return message.reply(`Added ${kUser} to Bot Owner List!`);
 		});
 	}

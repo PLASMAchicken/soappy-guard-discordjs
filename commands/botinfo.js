@@ -41,7 +41,6 @@ async function botinfo(bot, message) {
 	}
 
 	m = await m.edit('calculating ping.');
-	await console.log(message.createdTimestamp + '+' + m.editedTimestamp);
 	await botembed.addField('Ping:', `Latency is ${m.createdTimestamp - message.createdTimestamp}ms.\nAPI Latency is ${Math.round(bot.ping)}ms!\nLatency between receiving and sending is ${await m.editedTimestamp - message.createdTimestamp} ms! `);
 	await m.edit(botembed);
 }

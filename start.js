@@ -19,22 +19,24 @@ const starboard = require('./starboard.js');
 
 // startup
 const bot = new Discord.Client({}); // Start Bot
+bot.chalk = require('chalk');
 bot.commands = new Discord.Collection(); // Init Command Handler
 commandhandler.start(bot, timestamp); // Start Loading Commands
 if(process.env.waitfordb == 'true' || process.env.waitfordb == true) {
-	console.log(`${timestamp()} Waiting for DataBase to load up!`);
+	console.log(bot.chalk.yellow(`${timestamp()} Waiting for DataBase to load up!`));
 	setTimeout(function() {
 		bot.login(process.env.TOKEN); // login to Discord
-		console.log(`${timestamp()} Database should be ready now!`);
+		console.log(bot.chalk.green(`${timestamp()} Database should be ready now!`));
 	}, 100000);
 }
 else{
 	bot.login(process.env.TOKEN); // login to Discord
-	console.log(`${timestamp()} Database wait skipped!`);
+	console.log(bot.chalk.green(`${timestamp()} Database wait skipped!`));
 }
 // Discord Bot List Support
 const DBL = require('dblapi.js');
 bot.dbl = new DBL(process.env.dbl);
+
 
 // Database
 const Enmap = require('enmap');
@@ -48,18 +50,17 @@ bot.on('ready', async () => { // when Bot Succesfullly loged into Discord
 	bot.userdata = new Enmap({ provider: new provider({ name: 'userdata' }) });
 	bot.tags = new Enmap({ provider: new provider({ name: 'tags' }) });
 	bot.defaultguildsettings = require('./config/defaultguildsettings.js'); // load bot config
-	console.log(`${timestamp()} ${bot.user.username} is online on ${bot.guilds.size} servers! \n${timestamp()} Bot started in ${bot.readyAt - launchtime}ms!`);
+	console.log(bot.chalk.yellow(`${timestamp()} ${bot.user.username} is online on ${bot.guilds.size} servers! \n${timestamp()} Bot started in ${bot.readyAt - launchtime}ms!`));
 	bot.user.setActivity(`${bot.guilds.size} servers${branch() ? `, on ${branch()} branch` : ''}!`, {
 		type: 'WATCHING',
 	});
-	if (bot.guilds.size == 0 || botconfig.on_start_print_invite == true) console.log(`${timestamp()} [Invite Bot]( https://discordapp.com/api/oauth2/authorize?client_id=${bot.user.id}&permissions=8&scope=bot )`);
-	dblpost();
+	if (bot.guilds.size == 0 || botconfig.on_start_print_invite == true) console.log(bot.chalk.green(`${timestamp()} [Invite Bot]( https://discordapp.com/api/oauth2/authorize?client_id=${bot.user.id}&permissions=8&scope=bot )`));
 	function dblpost() {
-		bot.dbl.postStats(bot.guilds.size).then(dbl => console.log(timestamp() + ' Updated Discord Bot List Stats! ' + require('util').inspect(dbl)));
+		bot.dbl.postStats(bot.guilds.size).then(dbl => console.log(bot.chalk.keyword('orange')(timestamp() + ' Updated Discord Bot List Stats! ' + require('util').inspect(dbl))));
 	}
+	dblpost();
 	bot.setInterval(dblpost, 600000);
 });
-
 bot.on('message', async message => { // on message run command
 	commandhandler.run(message, bot, timestamp);
 });

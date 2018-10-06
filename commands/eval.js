@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args) => {
 			const data = await request.get(bot.haste + '/raw/' + args[1]);
 			content = data.body.toString();
 		}
-		console.log(content);
+		console.log(bot.chalk.red(content));
 
 		if (cblockre.test(content)) {
 			content = content.replace(cblockre, '').trim();
