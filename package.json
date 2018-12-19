@@ -12,21 +12,7 @@
     "npm": "*"
   },
   "dependencies": {
-    "chalk": "^2.4.1",
-    "cheerio": "^1.0.0-rc.2",
-    "dblapi.js": "^2.2.0",
-    "discord.js": "^11.4.2",
-    "dotenv": "^5.0.1",
-    "enmap": "^2.7.2",
-    "enmap-level": "^2.1.0",
-    "enmap-sqlite": "^2.0.5",
-    "eslint": "^5.5.0",
-    "ms": "^2.1.1",
-    "node-fetch": "^2.2.0",
-    "processmaker": "^0.1.1",
-    "random-bytes": "^1.0.0",
-    "request": "^2.88.0",
-    "snekfetch": "^4.0.4"
+    "pg": "^7.7.1"
   },
   "devDependencies": {},
   "scripts": {
